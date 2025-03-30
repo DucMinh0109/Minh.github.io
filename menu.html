@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Ngon - Thực Đơn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffe0d1;
+        }
+        
+        .page-title {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .menu-section {
+            padding: 3rem 0;
+        }
+        
+        .menu-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .menu-filter button {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 0.6rem 1.2rem;
+            margin: 0 0.5rem 0.5rem 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .menu-filter button.active, .menu-filter button:hover {
+            background-color: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+        
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .menu-item-image {
+            height: 200px;
+            background-color: #ddd;
+        }
+        
+        .menu-item-info {
+            padding: 1.5rem;
+        }
+        
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.7rem;
+        }
+        
+        .menu-item-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2e4057;
+        }
+        
+        .menu-item-price {
+            font-weight: bold;
+            color: #ff6b35;
+            font-size: 1.1rem;
+        }
+        
+        .menu-item-description {
+            color: #777;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e85a2a;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+        
+        .btn-outline:hover {
+            background-color: #ff6b35;
+            color: white;
+        }
+        
+        footer {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Nhà Hàng Ngon</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Thực Đơn Của Chúng Tôi</h1>
+            <p>Khám phá những món ăn tuyệt vời nhất của chúng tôi</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section">
+        <div class="container">
+            <div class="menu-filter">
+                <button class="active">Tất Cả</button>
+                <button>Khai Vị</button>
+                <button>Món Chính</button>
+                <button>Hải Sản</button>
+                <button>Món Chay</button>
+                <button>Tráng Miệng</button>
+                <button>Đồ Uống</button>
+            </div>
+
+            <div class="menu-items">
+                <!-- Món khai vị -->
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Gỏi cuốn tôm thịt</h3>
+                            <span class="menu-item-price">45.000₫</span>
+                        </div>
+                        <p class="menu-item-description">Gỏi cuốn tươi với tôm, thịt heo, rau sống và bún, kèm nước chấm đặc biệt.</p>
+                        <button class="btn btn-outline">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Chả giò hải sản</h3>
+                            <span class="menu-item-price">65.000₫</span>
+                        </div>
+                        <p class="menu-item-description">Chả giò giòn rụm nhân hải sản đặc biệt, kèm rau sống và nước mắm chua ngọt.</p>
+                        <button class="btn btn-outline">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <!-- Món chính -->
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Phở bò đặc biệt</h3>
+                            <span class="menu-item-price">85.000₫</span>
+                        </div>
+                        <p class="menu-item-description">Phở bò với nước dùng đặc biệt nấu trong 24 giờ, thịt bò tươi và các loại gia vị thơm ngon.</p>
+                        <button class="btn btn-outline">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Bún chả Hà Nội</h3>
+                            <span class="menu-item-price">75.000₫</span>
+                        </div>
+                        <p class="menu-item-description">Bún chả truyền thống với thịt nướng, chả viên, bún tươi và nước mắm pha đặc biệt.</p>
+                        <button class="btn btn-outline">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <!-- Hải sản -->
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Cá hồi nướng sốt chanh dây</h3>
+                            <span class="menu-item-price">125.000₫</span>
+                        </div>
+                        <p class="menu-item-description">Cá hồi Na Uy tươi ngon nướng với sốt chanh dây, kèm rau củ hấp.</p>
+                        <button class="btn btn-outline">Thêm vào giỏ</button>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-item-image"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Tôm hấp bia</h3>
+                            <span class="menu-item-price">165.000₫</span>
+                        </div>
+                        <p class="menu-item-description">Tôm sú tươi hấp với bia và gia vị đặc biệt, thơm ngon và giữ được vị ngọt tự nhiên.</p>
+                        <button class="btn btn-outline">Thêm vào giỏ</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="index.html" class="btn">Quay Lại Trang Chủ</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript đơn giản để xử lý nút lọc thực đơn
+        const filterButtons = document.querySelectorAll('.menu-filter button');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Trong một ứng dụng thực tế, bạn sẽ cần thêm code để lọc món ăn ở đây
+            });
+        });
+    </script>
+</body>
+</html>
