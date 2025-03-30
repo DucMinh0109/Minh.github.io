@@ -1615,7 +1615,473 @@
                     <p>Chúng tôi tự hào mang đến những món ăn ngon nhất, được chế biến từ những nguyên liệu tươi ngon nhất.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i>fas fa-utensils"></i>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Thời Gian Mở Cửa</h3>
+                    <ul>
+                        <li>Thứ Hai - Thứ Sáu: 10:00 - 22:00</li>
+                        <li>Thứ Bảy - Chủ Nhật: 8:00 - 23:00</li>
+                        <li>Ngày Lễ: 8:00 - 22:00</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Liên Hệ</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận XYZ, TP. HCM</li>
+                        <li><i class="fas fa-phone"></i> 028 1234 5678</li>
+                        <li><i class="fas fa-envelope"></i> info@nhahangngon.com</li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Đăng Ký Nhận Tin</h3>
+                    <p>Đăng ký để nhận thông tin về khuyến mãi và món mới</p>
+                    <div class="form-group">
+                        <input type="email" placeholder="Email của bạn">
+                    </div>
+                    <button class="btn">Đăng Ký</button>
+                    <div class="language-selector">
+                        <select>
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenu.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Menu filter
+        const filterButtons = document.querySelectorAll('.menu-filter button');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filter = button.getAttribute('data-filter');
+
+                menuItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Quantity controls
+        const quantityInputs = document.querySelectorAll('.quantity-input');
+        const quantityDecrease = document.querySelectorAll('.quantity-decrease');
+        const quantityIncrease = document.querySelectorAll('.quantity-increase');
+
+        quantityDecrease.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const input = quantityInputs[index];
+                let value = parseInt(input.value);
+                if (value > 1) {
+                    input.value = value - 1;
+                }
+            });
+        });
+
+        quantityIncrease.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                const input = quantityInputs[index];
+                let value = parseInt(input.value);
+                input.value = value + 1;
+            });
+        });
+
+        // Menu tabs
+        const menuTabs = document.querySelectorAll('.menu-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        menuTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and contents
+                menuTabs.forEach(tab => tab.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab and related content
+                tab.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Shopping cart
+        let cart = [];
+        const cartBadge = document.getElementById('cartBadge');
+        const cartItems = document.getElementById('cartItems');
+        const subtotalEl = document.getElementById('subtotal');
+        const deliveryFeeEl = document.getElementById('deliveryFee');
+        const discountEl = document.getElementById('discount');
+        const totalEl = document.getElementById('total');
+        const notification = document.getElementById('notification');
+
+        // Add to cart
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseInt(button.getAttribute('data-price'));
+                const quantity = parseInt(button.parentElement.querySelector('.quantity-input').value);
+                
+                // Check if item already exists in cart
+                const existingItem = cart.find(item => item.id === id);
+                
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({
+                        id,
+                        name,
+                        price,
+                        quantity
+                    });
+                }
+                
+                updateCart();
+                showNotification('Món ăn đã được thêm vào giỏ hàng!');
+            });
+        });
+
+        function updateCart() {
+            // Update cart badge
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartBadge.textContent = totalItems;
+            
+            // If cart is empty
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="empty-cart">Giỏ hàng của bạn đang trống. Vui lòng thêm món ăn từ thực đơn.</p>';
+                updateSummary(0, 0, 0);
+                return;
+            }
+            
+            // Update cart items
+            let cartHTML = '';
+            cart.forEach(item => {
+                cartHTML += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="cart-item-image">
+                            <img src="/api/placeholder/80/80" alt="${item.name}">
+                        </div>
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-title">${item.name}</h3>
+                            <p class="cart-item-price">${formatCurrency(item.price)}₫</p>
+                            <div class="cart-item-quantity">
+                                <button class="cart-decrease" data-id="${item.id}">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="cart-increase" data-id="${item.id}">+</button>
+                            </div>
+                        </div>
+                        <div class="cart-item-actions">
+                            <p>${formatCurrency(item.price * item.quantity)}₫</p>
+                            <button class="remove-from-cart" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            cartItems.innerHTML = cartHTML;
+            
+            // Calculate totals
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            let deliveryFee = 0;
+            
+            if (document.getElementById('deliveryOption').checked && subtotal < 200000) {
+                deliveryFee = 30000;
+            }
+            
+            let discount = 0;
+            
+            if (subtotal > 300000) {
+                discount = Math.floor(subtotal * 0.1);
+            }
+            
+            updateSummary(subtotal, deliveryFee, discount);
+            
+            // Add event listeners to cart item buttons
+            addCartItemListeners();
+        }
+
+        function addCartItemListeners() {
+            // Decrease quantity
+            const cartDecreaseButtons = document.querySelectorAll('.cart-decrease');
+            cartDecreaseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const item = cart.find(item => item.id === id);
+                    
+                    if (item.quantity > 1) {
+                        item.quantity--;
+                    } else {
+                        cart = cart.filter(item => item.id !== id);
+                    }
+                    
+                    updateCart();
+                });
+            });
+            
+            // Increase quantity
+            const cartIncreaseButtons = document.querySelectorAll('.cart-increase');
+            cartIncreaseButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const item = cart.find(item => item.id === id);
+                    
+                    item.quantity++;
+                    updateCart();
+                });
+            });
+            
+            // Remove from cart
+            const removeButtons = document.querySelectorAll('.remove-from-cart');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    cart = cart.filter(item => item.id !== id);
+                    updateCart();
+                });
+            });
+        }
+
+        function updateSummary(subtotal, deliveryFee, discount) {
+            subtotalEl.textContent = formatCurrency(subtotal) + '₫';
+            deliveryFeeEl.textContent = formatCurrency(deliveryFee) + '₫';
+            discountEl.textContent = '-' + formatCurrency(discount) + '₫';
+            totalEl.textContent = formatCurrency(subtotal + deliveryFee - discount) + '₫';
+        }
+
+        function formatCurrency(amount) {
+            return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+
+        // Delivery option change
+        const deliveryOptions = document.querySelectorAll('input[name="deliveryOption"]');
+        const addressForm = document.getElementById('addressForm');
+        
+        deliveryOptions.forEach(option => {
+            option.addEventListener('change', () => {
+                if (option.value === 'delivery') {
+                    addressForm.style.display = 'block';
+                    
+                    // Add delivery fee if subtotal is less than 200,000
+                    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    let deliveryFee = 0;
+                    
+                    if (subtotal < 200000) {
+                        deliveryFee = 30000;
+                    }
+                    
+                    let discount = 0;
+                    
+                    if (subtotal > 300000) {
+                        discount = Math.floor(subtotal * 0.1);
+                    }
+                    
+                    updateSummary(subtotal, deliveryFee, discount);
+                } else {
+                    addressForm.style.display = 'none';
+                    
+                    // Remove delivery fee
+                    const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+                    let discount = 0;
+                    
+                    if (subtotal > 300000) {
+                        discount = Math.floor(subtotal * 0.1);
+                    }
+                    
+                    updateSummary(subtotal, 0, discount);
+                }
+            });
+        });
+
+        // Checkout
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const orderSuccessModal = document.getElementById('orderSuccessModal');
+        const closeSuccessModal = document.getElementById('closeSuccessModal');
+        const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+        const orderNumber = document.getElementById('orderNumber');
+        
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification('Giỏ hàng của bạn đang trống!');
+                return;
+            }
+            
+            // Validate form if delivery option is selected
+            if (document.getElementById('deliveryOption').checked) {
+                const customerName = document.getElementById('customerName').value;
+                const customerPhone = document.getElementById('customerPhone').value;
+                const customerAddress = document.getElementById('customerAddress').value;
+                
+                if (!customerName || !customerPhone || !customerAddress) {
+                    showNotification('Vui lòng điền đầy đủ thông tin giao hàng!');
+                    return;
+                }
+            }
+            
+            // Generate random order number
+            const randomOrderNumber = Math.floor(100000 + Math.random() * 900000);
+            orderNumber.textContent = randomOrderNumber;
+            
+            // Show success modal
+            orderSuccessModal.style.display = 'flex';
+            
+            // Clear cart
+            cart = [];
+            updateCart();
+            
+            // Hide cart section
+            document.getElementById('cart').style.display = 'none';
+        });
+        
+        closeSuccessModal.addEventListener('click', () => {
+            orderSuccessModal.style.display = 'none';
+        });
+        
+        continueShoppingBtn.addEventListener('click', () => {
+            orderSuccessModal.style.display = 'none';
+            window.scrollTo({
+                top: document.getElementById('menu').offsetTop - 100,
+                behavior: 'smooth'
+            });
+        });
+
+        // Navigation
+        const navLinks = document.querySelectorAll('nav a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const targetId = link.getAttribute('href');
+                
+                if (targetId === '#cart') {
+                    document.getElementById('cart').style.display = 'block';
+                    window.scrollTo({
+                        top: document.getElementById('cart').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    const targetSection = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close mobile menu if open
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Search
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.querySelector('.search-btn');
+        
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            menuItems.forEach(item => {
+                const title = item.querySelector('.menu-item-title').textContent.toLowerCase();
+                const description = item.querySelector('.menu-item-description').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Reset filter buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            filterButtons[0].classList.add('active'); // Set "All" as active
+        }
+        
+        searchBtn.addEventListener('click', performSearch);
+        
+        searchInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // QR Code
+        const generateQrBtn = document.getElementById('generateQrBtn');
+        const tableNumber = document.getElementById('tableNumber');
+        
+        generateQrBtn.addEventListener('click', () => {
+            // In a real application, this would generate a unique QR code for the table
+            showNotification('Đã tạo mã QR cho bàn số ' + tableNumber.value);
+        });
+
+        // Smooth scrolling for all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                
+                if (targetId === '#cart') {
+                    document.getElementById('cart').style.display = 'block';
+                    window.scrollTo({
+                        top: document.getElementById('cart').offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                } else if (targetId !== '#') {
+                    const targetSection = document.querySelector(targetId);
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Initial calls
+        updateCart();
+    </script>
+</body>
+</html>fas fa-utensils"></i>
                     Nhà Hàng Ngon
                 </div>
                 <nav>
