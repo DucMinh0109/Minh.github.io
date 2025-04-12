@@ -110,6 +110,28 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .menu-filter button {
+            transition: all 0.3s ease;
+        }
+        
+        .menu-filter button:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .menu-filter button.active {
+            background-color: #ff6b35;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
         .menu-item-image {
@@ -327,6 +349,166 @@
                 // Trong một ứng dụng thực tế, bạn sẽ cần thêm code để lọc món ăn ở đây
             });
         });
+    
+        // 4. Thêm chức năng điều chỉnh số lượng món ăn vào menu.html
+        
+        Cải tiến trang menu để có thể thêm nhanh món ăn vào giỏ hàng với số lượng tùy chỉnh:
+    
+        <style>
+            .menu-item-actions {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 1rem;
+            }
+            
+            .view-details-btn {
+                color: #2e4057;
+                text-decoration: none;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+            
+            .view-details-btn:hover {
+                color: #ff6b35;
+            }
+            
+            .quick-add-container {
+                position: relative;
+            }
+            
+            .add-to-cart-btn {
+                width: 36px;
+                height: 36px;
+                background-color: #ff6b35;
+                color: white;
+                border: none;
+                border-radius: 50%;
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .add-to-cart-btn:hover {
+                background-color: #e85a2a;
+                transform: scale(1.1);
+            }
+            
+            .quick-add-popup {
+                position: absolute;
+                right: 0;
+                bottom: 45px;
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                padding: 0.8rem;
+                display: none;
+                z-index: 10;
+                width: 150px;
+            }
+            
+            .quick-add-popup.active {
+                display: block;
+            }
+            
+            .quick-add-quantity {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 0.5rem;
+            }
+            
+            .quick-quantity-btn {
+                width: 25px;
+                height: 25px;
+                background-color: #f5f5f5;
+                border: none;
+                border-radius: 50%;
+                font-size: 0.9rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.2s ease;
+            }
+            
+            .quick-quantity-btn:hover {
+                background-color: #e0e0e0;
+            }
+            
+            .quick-quantity-input {
+                width: 30px;
+                text-align: center;
+                border: 1px solid #ddd;
+                border-radius: 3px;
+                font-size: 0.9rem;
+            }
+            
+            .quick-add-btn {
+                width: 100%;
+                background-color: #ff6b35;
+                color: white;
+                border: none;
+                padding: 0.5rem;
+                border-radius: 3px;
+                font-size: 0.9rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            .quick-add-btn:hover {
+                background-color: #e85a2a;
+            }
+        </style>
+    
+        // Cải tiến hàm hiển thị menu
+        function renderMenu(category = 'all') {
+            const menuContainer = document.getElementById('menu-container');
+            let filteredDishes = dishes;
+            
+            if (category !== 'all') {
+                filteredDishes = dishes.filter(dish => dish.category === category);
+            }
+            
+            menuContainer.innerHTML = filteredDishes.map(dish => `
+                <div class="menu-item">
+                    <div class="menu-item-image" style="background-image: url('${dish.image}')"></div>
+                    <div class="menu-item-info">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">${dish.name}</h3>
+                            <div class="menu-item-price">${formatCurrency(dish.price)}</div>
+                        </div>
+                        <p class="menu-item-description">${dish.description}</p>
+                        <div class="menu-item-actions">
+                            <a href="dish-detail.html?id=${dish.id}" class="view-details-btn">Xem chi tiết</a>
+                            <div class="quick-add-container" id="quick-add-${dish.id}">
+                                <button class="add-to-cart-btn" onclick="toggleQuickAdd('${dish.id}')">+</button>
+                                <div class="quick-add-popup" id="popup-${dish.id}">
+                                    <div class="quick-add-quantity">
+                                        <button class="quick-quantity-btn" onclick="decreaseQuickQuantity('${dish.id}')">-</button>
+                                        <input type="number" id="quick-quantity-${dish.id}" class="quick-quantity-input" value="1" min="1" max="10" readonly>
+                                        <button class="quick-quantity-btn" onclick="increaseQuickQuantity('${dish.id}')">+</button>
+                                    </div>
+                                    <button class="quick-add-btn" onclick="quickAddToCart('${dish.id}')">Thêm vào giỏ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Cập nhật trạng thái active cho nút lọc
+            const filterButtons = document.querySelectorAll('.menu-filter button');
+            filterButtons.forEach(button => {
+                if (button.getAttribute('data-category') === category) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>

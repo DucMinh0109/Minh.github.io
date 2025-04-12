@@ -192,3 +192,46 @@
     </footer>
 </body>
 </html>
+
+<style>
+    .btn {
+        transition: all 0.3s ease;
+    }
+    
+    .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .btn:active {
+        transform: translateY(-1px);
+    }
+    
+    .featured-dish {
+        transition: all 0.3s ease;
+    }
+    
+    .featured-dish:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    nav ul li a {
+        position: relative;
+    }
+    
+    nav ul li a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: #ffe0d1;
+        transition: width 0.3s ease;
+    }
+    
+    nav ul li a:hover::after {
+        width: 100%;
+    }
+</style>

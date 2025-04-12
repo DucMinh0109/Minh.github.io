@@ -289,6 +289,7 @@
     <section class="page-title">
         <div class="container">
             <h1>Thanh Toán</h1>
+            <p class="subtitle">Hoàn tất đơn hàng của bạn</p>
         </div>
     </section>
 
@@ -411,16 +412,11 @@
         
         if (isLoggedIn) {
             authLink.textContent = 'Tài Khoản';
-            // Điền thông tin người dùng vào form nếu đã đăng nhập
-            const userName = localStorage.getItem('userName');
-            const userPhone = localStorage.getItem('userPhone');
-            const userAddress = localStorage.getItem('userAddress');
-            
-            if (userName) document.getElementById('name').value = userName;
-            if (userPhone) document.getElementById('phone').value = userPhone;
-            if (userAddress) document.getElementById('address').value = userAddress;
+            authLink.href = 'account.html';
         } else {
             authLink.textContent = 'Đăng Nhập';
+            // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+            window.location.href = 'login.html';
         }
 
         // Lấy giỏ hàng từ localStorage
@@ -434,47 +430,51 @@
             return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
         }
 
-        // Hiển thị tóm tắt đơn hàng
+        // Cải tiến hàm hiển thị tóm tắt đơn hàng
         function renderOrderSummary() {
+            const orderSummaryContainer = document.getElementById('order-summary-container');
             const cart = getCart();
-            const orderItemsContainer = document.getElementById('order-items');
-            const subtotalElement = document.getElementById('subtotal');
-            const totalElement = document.getElementById('total');
             
             if (cart.length === 0) {
                 window.location.href = 'cart.html';
                 return;
             }
             
-            const subtotal = calculateTotal(cart);
-            let deliveryFee = 15000;
+            let orderHTML = '<div class="order-items">';
             
-            // Hiển thị các món ăn trong đơn hàng
-            orderItemsContainer.innerHTML = cart.map(item => `
-                <div class="order-item">
-                    <div class="order-item-name">
-                        <div class="order-item-quantity">${item.quantity}</div>
-                        <span>${item.name}</span>
+            cart.forEach(item => {
+                orderHTML += `
+                    <div class="order-item">
+                        <div class="order-item-name">${item.name} x ${item.quantity}</div>
+                        <div class="order-item-price">${formatCurrency(item.price * item.quantity)}</div>
                     </div>
-                    <div class="order-item-price">${(item.price * item.quantity).toLocaleString()}₫</div>
+                `;
+            });
+            
+            orderHTML += '</div>';
+            
+            const subtotal = calculateTotal(cart);
+            const shippingFee = 30000; // Phí vận chuyển cố định
+            const total = subtotal + shippingFee;
+            
+            orderHTML += `
+                <div class="order-summary-totals">
+                    <div class="order-summary-subtotal">
+                        <span>Tạm tính:</span>
+                        <span>${formatCurrency(subtotal)}</span>
+                    </div>
+                    <div class="order-summary-shipping">
+                        <span>Phí vận chuyển:</span>
+                        <span>${formatCurrency(shippingFee)}</span>
+                    </div>
+                    <div class="order-summary-total">
+                        <span>Tổng cộng:</span>
+                        <span>${formatCurrency(total)}</span>
+                    </div>
                 </div>
-            `).join('');
+            `;
             
-            // Cập nhật tổng tiền
-            subtotalElement.textContent = `${subtotal.toLocaleString()}₫`;
-            totalElement.textContent = `${(subtotal + deliveryFee).toLocaleString()}₫`;
-            
-            // Ẩn phí giao hàng nếu không phải đơn giao hàng
-            const orderType = document.querySelector('.order-type-option.active').dataset.type;
-            const deliveryFeeRow = document.getElementById('delivery-fee-row');
-            
-            if (orderType !== 'delivery') {
-                deliveryFeeRow.style.display = 'none';
-                totalElement.textContent = `${subtotal.toLocaleString()}₫`;
-            } else {
-                deliveryFeeRow.style.display = 'flex';
-                totalElement.textContent = `${(subtotal + deliveryFee).toLocaleString()}₫`;
-            }
+            orderSummaryContainer.innerHTML = orderHTML;
         }
 
         // Xử lý chuyển đổi loại đơn hàng

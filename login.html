@@ -92,10 +92,81 @@
             cursor: pointer;
             font-weight: bold;
             color: #777;
+            transition: all 0.3s ease;
+            position: relative;
         }
         
         .auth-tab.active {
             color: #ff6b35;
+        }
+        
+        .auth-tab::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -1px;
+            left: 0;
+            background-color: #ff6b35;
+            transition: width 0.3s ease;
+        }
+        
+        .auth-tab.active::after {
+            width: 100%;
+        }
+        
+        .auth-tab:hover::after {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+            outline: none;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #555;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-auth {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-auth:hover {
+            background-color: #e85a2a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .auth-tab.active {
             border-bottom: 3px solid #ff6b35;
         }
         

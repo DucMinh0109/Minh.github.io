@@ -324,7 +324,7 @@
         </div>
     </footer>
 
-    <style>
+    <script>
         // Kiểm tra trạng thái đăng nhập
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
         const authLink = document.getElementById('auth-link');
@@ -559,8 +559,8 @@
         }
 
         // Thêm vào giỏ hàng
-        // Cải tiến hàm addToCart để thêm thông báo rõ ràng hơn và kiểm tra đăng nhập
         function addToCart(dish, quantity) {
+            quantity = parseInt(quantity);
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             
             // Kiểm tra xem món ăn đã có trong giỏ hàng chưa
@@ -614,6 +614,7 @@
 </html>
 
 <style>
+    /* Thêm CSS cho thông báo thêm vào giỏ hàng */
     .add-to-cart-notification {
         position: fixed;
         top: 20px;
