@@ -324,7 +324,7 @@
         </div>
     </footer>
 
-    <script>
+    <style>
         // Kiểm tra trạng thái đăng nhập
         const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
         const authLink = document.getElementById('auth-link');
@@ -559,6 +559,7 @@
         }
 
         // Thêm vào giỏ hàng
+        // Cải tiến hàm addToCart để thêm thông báo rõ ràng hơn và kiểm tra đăng nhập
         function addToCart(dish, quantity) {
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             
@@ -574,18 +575,84 @@
                     id: dish.id,
                     name: dish.name,
                     price: dish.price,
+                    image: dish.image, // Thêm hình ảnh vào giỏ hàng
                     quantity: quantity
                 });
             }
             
             localStorage.setItem('cart', JSON.stringify(cart));
-            alert(`Đã thêm ${quantity} ${dish.name} vào giỏ hàng!`);
+            
+            // Hiển thị thông báo rõ ràng hơn
+            const notification = document.createElement('div');
+            notification.className = 'add-to-cart-notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="notification-icon">✓</i>
+                    <div class="notification-text">
+                        <p>Đã thêm ${quantity} ${dish.name} vào giỏ hàng!</p>
+                        <a href="cart.html" class="view-cart-link">Xem giỏ hàng</a>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            // Tự động ẩn thông báo sau 3 giây
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 3000);
         }
 
         // Hiển thị chi tiết món ăn khi trang được tải
         document.addEventListener('DOMContentLoaded', () => {
             renderDishDetail();
         });
-    </script>
+    </style>
 </body>
 </html>
+
+<style>
+    .add-to-cart-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        z-index: 1000;
+        transition: opacity 0.5s;
+    }
+    
+    .notification-content {
+        display: flex;
+        align-items: center;
+    }
+    
+    .notification-icon {
+        background-color: white;
+        color: #4CAF50;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+    
+    .notification-text {
+        flex: 1;
+    }
+    
+    .view-cart-link {
+        color: white;
+        text-decoration: underline;
+        display: block;
+        margin-top: 5px;
+    }
+</style>

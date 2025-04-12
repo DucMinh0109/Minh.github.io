@@ -250,6 +250,7 @@
     <section class="page-title">
         <div class="container">
             <h1>Giỏ Hàng Của Bạn</h1>
+            <p class="subtitle">Xem lại và điều chỉnh các món ăn trước khi thanh toán</p>
         </div>
     </section>
 
@@ -306,7 +307,9 @@
             if (cart.length === 0) {
                 cartContainer.innerHTML = `
                     <div class="cart-empty">
-                        <p>Giỏ hàng của bạn đang trống</p>
+                        <img src="https://i.imgur.com/uLAimaY.png" alt="Giỏ hàng trống">
+                        <h2>Giỏ hàng của bạn đang trống</h2>
+                        <p>Hãy thêm một số món ăn ngon vào giỏ hàng của bạn</p>
                         <a href="menu.html" class="btn">Xem Thực Đơn</a>
                     </div>
                 `;
