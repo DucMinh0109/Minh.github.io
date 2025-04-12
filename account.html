@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Ngon - Tài Khoản</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffe0d1;
+        }
+        
+        .page-title {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .account-section {
+            padding: 3rem 0;
+        }
+        
+        .account-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .account-sidebar {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+        }
+        
+        .account-sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .account-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #ff6b35;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        
+        .account-name {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .account-phone {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .account-menu {
+            list-style: none;
+        }
+        
+        .account-menu-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .account-menu-link {
+            display: block;
+            padding: 0.8rem;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+        
+        .account-menu-link:hover, .account-menu-link.active {
+            background-color: #fff3e0;
+            color: #ff6b35;
+        }
+        
+        .account-menu-link i {
+            margin-right: 0.5rem;
+            color: #ff6b35;
+        }
+        
+        .account-content {
+            flex: 3;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .account-section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #2e4057;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e85a2a;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+        
+        .btn-outline:hover {
+            background-color: #ff6b35;
+            color: white;
+        }
+        
+        .account-tab {
+            display: none;
+        }
+        
+        .account-tab.active {
+            display: block;
+        }
+        
+        .order-history-item {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .order-history-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-history-id {
+            font-weight: bold;
+        }
+        
+        .order-history-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .order-history-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background-color: #f0f0f0;
+            color: #777;
+        }
+        
+        .order-history-status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .order-history-status.processing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .order-history-status.completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .order-history-status.cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .order-history-total {
+            font-weight: bold;
+            color: #2e4057;
+        }
+        
+        .logout-btn {
+            margin-top: 2rem;
+            width: 100%;
+        }
+        
+        footer {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .favorite-dishes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .favorite-dish {
+            width: calc(33.33% - 1rem);
+            min-width: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .favorite-dish:hover {
+            transform: translateY(-5px);
+        }
+
+        .favorite-dish-img {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .favorite-dish-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .favorite-dish-info {
+            padding: 1rem;
+        }
+
+        .favorite-dish-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2e4057;
+        }
+
+        .favorite-dish-price {
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .favorite-dish-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .notification-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .notification-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .notification-icon.order {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .notification-icon.promo {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-text {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .notification-time {
+            color: #777;
+            font-size: 0.8rem;
+        }
+
+        .notification-unread {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ff6b35;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+
+        .address-item {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .address-default {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #d4edda;
+            color: #155724;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .address-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .address-details {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .address-phone {
+            color: #777;
+            margin-bottom: 1rem;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .address-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Nhà Hàng Ngon</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                        <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Tài Khoản Của Tôi</h1>
+        </div>
+    </section>
+
+    <!-- Account Section -->
+    <section class="account-section">
+        <div class="container">
+            <div class="account-container">
+                <div class="account-sidebar">
+                    <div class="account-sidebar-header">
+                        <div class="account-avatar" id="account-avatar"></div>
+                        <div>
+                            <div class="account-name" id="account-name"></div>
+                            <div class="account-phone" id="account-phone"></div>
+                        </div>
+                    </div>
+                    <ul class="account-menu">
+                        <li class="account-menu-item">
+                            <a href="#profile" class="account-menu-link active" data-tab="profile-tab">
+                                <i>👤</i> Thông tin cá nhân
+                            </a>
+                        </li>
+                        <li class="account-menu-item">
+                            <a href="#orders" class="account-menu-link" data-tab="orders-tab">
+                                <i>📋</i> Lịch sử đơn hàng
+                            </a>
+                        </li>
+                        <li class="account-menu-item">
+                            <a href="#addresses" class="account-menu-link" data-tab="addresses-tab">
+                                <i>📍</i> Địa chỉ giao hàng
+                            </a>
+                        </li>
+                        <li class="account-menu-item">
+                            <a href="#favorites" class="account-menu-link" data-tab="favorites-tab">
+                                <i>❤️</i> Món ăn yêu thích
+                            </a>
+                        </li>
+                        <li class="account-menu-item">
+                            <a href="#notifications" class="account-menu-link" data-tab="notifications-tab">
+                                <i>🔔</i> Thông báo
+                            </a>
+                        </li>
+                    </ul>
+                    <button class="btn btn-outline logout-btn" id="logout-btn">Đăng Xuất</button>
+                </div>
+                <div class="account-content">
+                    <!-- Profile Tab -->
+                    <div class="account-tab active" id="profile-tab">
+                        <h2 class="account-section-title">Thông Tin Cá Nhân</h2>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="profile-name">Họ Tên</label>
+                                <input type="text" id="profile-name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-phone">Số Điện Thoại</label>
+                                <input type="tel" id="profile-phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-email">Email</label>
+                                <input type="email" id="profile-email" name="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-birthday">Ngày Sinh</label>
+                                <input type="date" id="profile-birthday" name="birthday">
+                            </div>
+                            <button type="submit" class="btn">Cập Nhật Thông Tin</button>
+                        </form>
+                        
+                        <h2 class="account-section-title" style="margin-top: 2rem;">Đổi Mật Khẩu</h2>
+                        <form id="password-form">
+                            <div class="form-group">
+                                <label for="current-password">Mật Khẩu Hiện Tại</label>
+                                <input type="password" id="current-password" name="current-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Mật Khẩu Mới</label>
+                                <input type="password" id="new-password" name="new-password">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Xác Nhận Mật Khẩu Mới</label>
+                                <input type="password" id="confirm-password" name="confirm-password">
+                            </div>
+                            <button type="submit" class="btn">Đổi Mật Khẩu</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Orders Tab -->
+                    <div class="account-tab" id="orders-tab">
+                        <h2 class="account-section-title">Lịch Sử Đơn Hàng</h2>
+                        <div id="order-history-container">
+                            <!-- Nội dung sẽ được tải động -->
+                        </div>
+                    </div>
+                    
+                    <!-- Addresses Tab -->
+                    <div class="account-tab" id="addresses-tab">
+                        <h2 class="account-section-title">Địa Chỉ Giao Hàng</h2>
+                        <div id="addresses-container">
+                            <!-- Nội dung sẽ được tải động -->
+                        </div>
+                        <button class="btn" id="add-address-btn" style="margin-top: 1rem;">Thêm Địa Chỉ Mới</button>
+                        
+                        <!-- Form thêm địa chỉ mới -->
+                        <div id="add-address-form" style="display: none; margin-top: 2rem;">
+                            <h3 style="margin-bottom: 1rem;">Thêm Địa Chỉ Mới</h3>
+                            <form id="address-form">
+                                <div class="form-group">
+                                    <label for="address-name">Tên người nhận</label>
+                                    <input type="text" id="address-name" name="name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-phone">Số điện thoại</label>
+                                    <input type="tel" id="address-phone" name="phone">
+                                </div>
+                                <div class="form-group">
+                                    <label for="address-details">Địa chỉ chi tiết</label>
+                                    <input type="text" id="address-details" name="details">
+                                </div>
+                                <div class="form-group">
+                                    <label>
+                                        <input type="checkbox" id="address-default" name="default">
+                                        Đặt làm địa chỉ mặc định
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn">Lưu Địa Chỉ</button>
+                                <button type="button" class="btn btn-outline" id="cancel-address-btn" style="margin-left: 1rem;">Hủy</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Favorites Tab -->
+                    <div class="account-tab" id="favorites-tab">
+                        <h2 class="account-section-title">Món Ăn Yêu Thích</h2>
+                        <div class="favorite-dishes" id="favorite-dishes-container">
+                            <!-- Nội dung sẽ được tải động -->
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications Tab -->
+                    <div class="account-tab" id="notifications-tab">
+                        <h2 class="account-section-title">Thông Báo</h2>
+                        <div id="notifications-container">
+                            <!-- Nội dung sẽ được tải động -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Kiểm tra trạng thái đăng nhập
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const authLink = document.getElementById('auth-link');
+        
+        if (isLoggedIn) {
+            authLink.textContent = 'Tài Khoản';
+            authLink.href = 'account.html';
+        } else {
+            authLink.textContent = 'Đăng Nhập';
+            // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+            window.location.href = 'login.html';
+        }
+
+        // Hiển thị thông tin người dùng
+        const userName = localStorage.getItem('userName') || 'Người dùng';
+        const userPhone = localStorage.getItem('userPhone') || '';
+        const userEmail = localStorage.getItem('userEmail') || '';
+        const userBirthday = localStorage.getItem('userBirthday') || '';
+        
+        document.getElementById('account-name').textContent = userName;
+        document.getElementById('account-phone').textContent = userPhone;
+        document.getElementById('account-avatar').textContent = userName.charAt(0);
+        
+        // Điền thông tin vào form
+        document.getElementById('profile-name').value = userName;
+        document.getElementById('profile-phone').value = userPhone;
+        document.getElementById('profile-email').value = userEmail;
+        document.getElementById('profile-birthday').value = userBirthday;
+
+        // Xử lý chuyển tab
+        const menuLinks = document.querySelectorAll('.account-menu-link');
+        const tabs = document.querySelectorAll('.account-tab');
+        
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Xóa active class từ tất cả các link và tab
+                menuLinks.forEach(l => l.classList.remove('active'));
+                tabs.forEach(t => t.classList.remove('active'));
+                
+                // Thêm active class cho link được click
+                link.classList.add('active');
+                
+                // Hiển thị tab tương ứng
+                const tabId = link.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Xử lý đăng xuất
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('userPhone');
+            localStorage.removeItem('userEmail');
+            localStorage.removeItem('userBirthday');
+            window.location.href = 'login.html';
+        });
+
+        // Xử lý cập nhật thông tin cá nhân
+        document.getElementById('profile-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('profile-name').value;
+            const phone = document.getElementById('profile-phone').value;
+            const email = document.getElementById('profile-email').value;
+            const birthday = document.getElementById('profile-birthday').value;
+            
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('userEmail', email);
+            localStorage.setItem('userBirthday', birthday);
+            
+            document.getElementById('account-name').textContent = name;
+            document.getElementById('account-phone').textContent = phone;
+            document.getElementById('account-avatar').textContent = name.charAt(0);
+            
+            alert('Cập nhật thông tin thành công!');
+        });
+
+        // Xử lý đổi mật khẩu
+        document.getElementById('password-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (newPassword !== confirmPassword) {
+                alert('Mật khẩu mới không khớp!');
+                return;
+            }
+            
+            // Trong thực tế, bạn sẽ gửi request đến server để đổi mật khẩu
+            // Ở đây chúng ta giả lập đổi mật khẩu thành công
+            alert('Đổi mật khẩu thành công!');
+            
+            // Reset form
+            document.getElementById('password-form').reset();
+        });
+
+        // Hiển thị lịch sử đơn hàng
+        function renderOrderHistory() {
+            const orderHistoryContainer = document.getElementById('order-history-container');
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            
+            if (orders.length === 0) {
+                orderHistoryContainer.innerHTML = '<p>Bạn chưa có đơn hàng nào.</p>';
+                return;
+            }
+            
+            orderHistoryContainer.innerHTML = orders.map(order => {
+                let statusClass = '';
+                switch (order.status) {
+                    case 'pending':
+                        statusClass = 'pending';
+                        break;
+                    case 'processing':
+                        statusClass = 'processing';
+                        break;
+                    case 'completed':
+                        statusClass = 'completed';
+                        break;
+                    case 'cancelled':
+                        statusClass = 'cancelled';
+                        break;
+                }
+                
+                let statusText = '';
+                switch (order.status) {
+                    case 'pending':
+                        statusText = 'Chờ xác nhận';
+                        break;
+                    case 'processing':
+                        statusText = 'Đang xử lý';
+                        break;
+                    case 'completed':
+                        statusText = 'Đã hoàn thành';
+                        break;
+                    case 'cancelled':
+                        statusText = 'Đã hủy';
+                        break;
+                }
+                
+                return `
+                    <div class="order-history-item">
+                        <div class="order-history-header">
+                            <div class="order-history-id">Đơn hàng #${order.id}</div>
+                            <div class="order-history-date">${new Date(order.date).toLocaleDateString('vi-VN')}</div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <div class="order-history-status ${statusClass}">${statusText}</div>
+                            <div class="order-history-total">${order.total.toLocaleString()}₫</div>
+                        </div>
+                        <a href="order-confirmation.html?id=${order.id}" class="btn btn-outline">Xem Chi Tiết</a>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Hiển thị địa chỉ giao hàng
+        function renderAddresses() {
+            const addressesContainer = document.getElementById('addresses-container');
+            const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+            
+            if (addresses.length === 0) {
+                addressesContainer.innerHTML = '<p>Bạn chưa có địa chỉ giao hàng nào.</p>';
+                return;
+            }
+            
+            addressesContainer.innerHTML = addresses.map((address, index) => {
+                return `
+                    <div class="address-item">
+                        ${address.default ? '<div class="address-default">Mặc định</div>' : ''}
+                        <div class="address-name">${address.name}</div>
+                        <div class="address-details">${address.details}</div>
+                        <div class="address-phone">${address.phone}</div>
+                        <div class="address-actions">
+                            <button class="btn btn-outline" onclick="editAddress(${index})">Sửa</button>
+                            <button class="btn btn-outline" onclick="deleteAddress(${index})">Xóa</button>
+                            ${!address.default ? `<button class="btn btn-outline" onclick="setDefaultAddress(${index})">Đặt làm mặc định</button>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Xử lý thêm địa chỉ mới
+        document.getElementById('add-address-btn').addEventListener('click', () => {
+            document.getElementById('add-address-form').style.display = 'block';
+        });
+        
+        document.getElementById('cancel-address-btn').addEventListener('click', () => {
+            document.getElementById('add-address-form').style.display = 'none';
+            document.getElementById('address-form').reset();
+        });
+        
+        document.getElementById('address-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('address-name').value;
+            const phone = document.getElementById('address-phone').value;
+            const details = document.getElementById('address-details').value;
+            const isDefault = document.getElementById('address-default').checked;
+            const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+            
+            if (isDefault) {
+                // Nếu địa chỉ mới là mặc định, cập nhật tất cả các địa chỉ khác thành không mặc định
+                addresses.forEach(address => {
+                    address.default = false;
+                });
+            }
+            
+            addresses.push({
+                name,
+                phone,
+                details,
+                default: isDefault
+            });
+            
+            localStorage.setItem('addresses', JSON.stringify(addresses));
+            
+            // Ẩn form và hiển thị lại danh sách địa chỉ
+            document.getElementById('add-address-form').style.display = 'none';
+            document.getElementById('address-form').reset();
+            renderAddresses();
+            
+            alert('Thêm địa chỉ mới thành công!');
+        });
+
+        // Các hàm xử lý địa chỉ
+        function editAddress(index) {
+            const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+            const address = addresses[index];
+            
+            document.getElementById('address-name').value = address.name;
+            document.getElementById('address-phone').value = address.phone;
+            document.getElementById('address-details').value = address.details;
+            document.getElementById('address-default').checked = address.default;
+            
+            document.getElementById('add-address-form').style.display = 'block';
+            
+            // Thay đổi xử lý form để cập nhật địa chỉ thay vì thêm mới
+            const addressForm = document.getElementById('address-form');
+            addressForm.onsubmit = function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('address-name').value;
+                const phone = document.getElementById('address-phone').value;
+                const details = document.getElementById('address-details').value;
+                const isDefault = document.getElementById('address-default').checked;
+                
+                if (isDefault) {
+                    // Nếu địa chỉ này là mặc định, cập nhật tất cả các địa chỉ khác thành không mặc định
+                    addresses.forEach(address => {
+                        address.default = false;
+                    });
+                }
+                
+                addresses[index] = {
+                    name,
+                    phone,
+                    details,
+                    default: isDefault
+                };
+                
+                localStorage.setItem('addresses', JSON.stringify(addresses));
+                
+                // Ẩn form và hiển thị lại danh sách địa chỉ
+                document.getElementById('add-address-form').style.display = 'none';
+                document.getElementById('address-form').reset();
+                renderAddresses();
+                
+                // Khôi phục xử lý form về thêm mới
+                addressForm.onsubmit = null;
+                
+                alert('Cập nhật địa chỉ thành công!');
+            };
+        }
+        
+        function deleteAddress(index) {
+            if (confirm('Bạn có chắc chắn muốn xóa địa chỉ này?')) {
+                const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+                addresses.splice(index, 1);
+                localStorage.setItem('addresses', JSON.stringify(addresses));
+                renderAddresses();
+            }
+        }
+        
+        function setDefaultAddress(index) {
+            const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
+            
+            // Cập nhật tất cả các địa chỉ thành không mặc định
+            addresses.forEach(address => {
+                address.default = false;
+            });
+            
+            // Đặt địa chỉ được chọn làm mặc định
+            addresses[index].default = true;
+            
+            localStorage.setItem('addresses', JSON.stringify(addresses));
+            renderAddresses();
+        }
+
+        // Hiển thị món ăn yêu thích
+        function renderFavoriteDishes() {
+            const favoriteDishesContainer = document.getElementById('favorite-dishes-container');
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            
+            if (favorites.length === 0) {
+                favoriteDishesContainer.innerHTML = '<p>Bạn chưa có món ăn yêu thích nào.</p>';
+                return;
+            }
+            
+            // Dữ liệu mẫu cho món ăn
+            const allDishes = [
+                {
+                    id: '1',
+                    name: 'Gỏi cuốn tôm thịt',
+                    price: 45000,
+                    image: 'https://i.imgur.com/1tMFzp8.jpg',
+                    category: 'appetizer'
+                },
+                {
+                    id: '2',
+                    name: 'Chả giò hải sản',
+                    price: 65000,
+                    image: 'https://i.imgur.com/2KNwRIY.jpg',
+                    category: 'appetizer'
+                },
+                {
+                    id: '3',
+                    name: 'Cá hồi nướng sốt chanh dây',
+                    price: 125000,
+                    image: 'https://i.imgur.com/3PtYi0a.jpg',
+                    category: 'seafood'
+                },
+                {
+                    id: '4',
+                    name: 'Tôm hấp bia',
+                    price: 165000,
+                    image: 'https://i.imgur.com/4QwGBr8.jpg',
+                    category: 'seafood'
+                },
+                {
+                    id: '5',
+                    name: 'Bò lúc lắc',
+                    price: 135000,
+                    image: 'https://i.imgur.com/5RmNpTz.jpg',
+                    category: 'meat'
+                },
+                {
+                    id: '6',
+                    name: 'Sườn nướng BBQ',
+                    price: 145000,
+                    image: 'https://i.imgur.com/6SvFtPx.jpg',
+                    category: 'meat'
+                },
+                {
+                    id: '7',
+                    name: 'Gà nướng mật ong',
+                    price: 120000,
+                    image: 'https://i.imgur.com/7UwGhTy.jpg',
+                    category: 'poultry'
+                },
+                {
+                    id: '8',
+                    name: 'Vịt quay Bắc Kinh',
+                    price: 180000,
+                    image: 'https://i.imgur.com/8XpYhZs.jpg',
+                    category: 'poultry'
+                }
+            ];
+            
+            const favoriteDishes = favorites.map(favoriteId => {
+                return allDishes.find(dish => dish.id === favoriteId);
+            }).filter(dish => dish !== undefined);
+            
+            favoriteDishesContainer.innerHTML = favoriteDishes.map(dish => `
+                <div class="favorite-dish">
+                    <div class="favorite-dish-img">
+                        <img src="${dish.image}" alt="${dish.name}">
+                    </div>
+                    <div class="favorite-dish-info">
+                        <div class="favorite-dish-title">${dish.name}</div>
+                        <div class="favorite-dish-price">${dish.price.toLocaleString()}₫</div>
+                        <div class="favorite-dish-actions">
+                            <a href="dish-detail.html?id=${dish.id}" class="btn btn-outline">Xem chi tiết</a>
+                            <button class="btn" onclick="addToCartFromFavorites('${dish.id}')">Thêm vào giỏ</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Thêm vào giỏ hàng từ danh sách yêu thích
+        function addToCartFromFavorites(dishId) {
+            // Dữ liệu mẫu cho món ăn
+            const allDishes = [
+                {
+                    id: '1',
+                    name: 'Gỏi cuốn tôm thịt',
+                    price: 45000,
+                    image: 'https://i.imgur.com/1tMFzp8.jpg',
+                    category: 'appetizer'
+                },
+                {
+                    id: '2',
+                    name: 'Chả giò hải sản',
+                    price: 65000,
+                    image: 'https://i.imgur.com/2KNwRIY.jpg',
+                    category: 'appetizer'
+                },
+                {
+                    id: '3',
+                    name: 'Cá hồi nướng sốt chanh dây',
+                    price: 125000,
+                    image: 'https://i.imgur.com/3PtYi0a.jpg',
+                    category: 'seafood'
+                },
+                {
+                    id: '4',
+                    name: 'Tôm hấp bia',
+                    price: 165000,
+                    image: 'https://i.imgur.com/4QwGBr8.jpg',
+                    category: 'seafood'
+                },
+                {
+                    id: '5',
+                    name: 'Bò lúc lắc',
+                    price: 135000,
+                    image: 'https://i.imgur.com/5RmNpTz.jpg',
+                    category: 'meat'
+                },
+                {
+                    id: '6',
+                    name: 'Sườn nướng BBQ',
+                    price: 145000,
+                    image: 'https://i.imgur.com/6SvFtPx.jpg',
+                    category: 'meat'
+                },
+                {
+                    id: '7',
+                    name: 'Gà nướng mật ong',
+                    price: 120000,
+                    image: 'https://i.imgur.com/7UwGhTy.jpg',
+                    category: 'poultry'
+                },
+                {
+                    id: '8',
+                    name: 'Vịt quay Bắc Kinh',
+                    price: 180000,
+                    image: 'https://i.imgur.com/8XpYhZs.jpg',
+                    category: 'poultry'
+                }
+            ];
+            
+            const dish = allDishes.find(d => d.id === dishId);
+            
+            if (!dish) return;
+            
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            
+            // Kiểm tra xem món ăn đã có trong giỏ hàng chưa
+            const existingItemIndex = cart.findIndex(item => item.id === dish.id);
+            
+            if (existingItemIndex !== -1) {
+                // Nếu đã có, tăng số lượng lên 1
+                cart[existingItemIndex].quantity += 1;
+            } else {
+                // Nếu chưa có, thêm mới với số lượng là 1
+                cart.push({
+                    id: dish.id,
+                    name: dish.name,
+                    price: dish.price,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`Đã thêm ${dish.name} vào giỏ hàng!`);
+        }
+
+        // Hiển thị thông báo
+        function renderNotifications() {
+            const notificationsContainer = document.getElementById('notifications-container');
+            
+            // Dữ liệu mẫu cho thông báo
+            const notifications = [
+                {
+                    id: 1,
+                    type: 'order',
+                    title: 'Đơn hàng đã được xác nhận',
+                    text: 'Đơn hàng #12345 của bạn đã được xác nhận và đang được chuẩn bị.',
+                    time: '2 giờ trước',
+                    read: false
+                },
+                {
+                    id: 2,
+                    type: 'promo',
+                    title: 'Khuyến mãi đặc biệt',
+                    text: 'Giảm 20% cho tất cả các món hải sản trong tuần này!',
+                    time: '1 ngày trước',
+                    read: true
+                },
+                {
+                    id: 3,
+                    type: 'order',
+                    title: 'Đơn hàng đã giao thành công',
+                    text: 'Đơn hàng #12340 của bạn đã được giao thành công. Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi!',
+                    time: '3 ngày trước',
+                    read: true
+                }
+            ];
+            
+            if (notifications.length === 0) {
+                notificationsContainer.innerHTML = '<p>Bạn không có thông báo nào.</p>';
+                return;
+            }
+            
+            notificationsContainer.innerHTML = notifications.map(notification => `
+                <div class="notification-item">
+                    <div class="notification-icon ${notification.type}">
+                        ${notification.type === 'order' ? '📦' : '🎁'}
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-title">${notification.title}</div>
+                        <div class="notification-text">${notification.text}</div>
+                        <div class="notification-time">${notification.time}</div>
+                    </div>
+                    ${notification.read ? '' : '<div class="notification-unread"></div>'}
+                </div>
+            `).join('');
+        }
+
+        // Tải dữ liệu khi trang được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOrderHistory();
+            renderAddresses();
+            renderFavoriteDishes();
+            renderNotifications();
+        });
+
+        // Đặt các hàm xử lý địa chỉ vào window để có thể gọi từ HTML
+        window.editAddress = editAddress;
+        window.deleteAddress = deleteAddress;
+        window.setDefaultAddress = setDefaultAddress;
+        window.addToCartFromFavorites = addToCartFromFavorites;
+    </script>
+</body>
+</html>

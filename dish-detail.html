@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Ngon - Chi Tiết Món Ăn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffe0d1;
+        }
+        
+        .dish-detail {
+            padding: 3rem 0;
+        }
+        
+        .dish-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .dish-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .dish-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .dish-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .dish-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2e4057;
+        }
+        
+        .dish-price {
+            font-size: 1.5rem;
+            color: #ff6b35;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+        
+        .dish-description {
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .dish-ingredients {
+            margin-bottom: 1.5rem;
+        }
+        
+        .dish-ingredients h3 {
+            margin-bottom: 0.5rem;
+            color: #2e4057;
+        }
+        
+        .dish-ingredients ul {
+            list-style: none;
+        }
+        
+        .dish-ingredients ul li {
+            padding: 0.3rem 0;
+            color: #555;
+        }
+        
+        .dish-ingredients ul li:before {
+            content: "• ";
+            color: #ff6b35;
+        }
+        
+        .dish-nutrition {
+            margin-bottom: 1.5rem;
+        }
+        
+        .dish-nutrition h3 {
+            margin-bottom: 0.5rem;
+            color: #2e4057;
+        }
+        
+        .nutrition-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .nutrition-item {
+            background-color: #f5f5f5;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            background-color: #f5f5f5;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            margin: 0 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #e85a2a;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+        
+        .btn-outline:hover {
+            background-color: #ff6b35;
+            color: white;
+        }
+        
+        .related-dishes {
+            margin-top: 3rem;
+        }
+        
+        .related-dishes h2 {
+            margin-bottom: 1.5rem;
+            color: #2e4057;
+            text-align: center;
+        }
+        
+        .related-dishes-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+        
+        .related-dish {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 250px;
+            transition: transform 0.3s;
+        }
+        
+        .related-dish:hover {
+            transform: translateY(-5px);
+        }
+        
+        .related-dish-image {
+            height: 150px;
+            background-color: #eee;
+        }
+        
+        .related-dish-info {
+            padding: 1rem;
+        }
+        
+        .related-dish-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2e4057;
+        }
+        
+        .related-dish-price {
+            color: #ff6b35;
+            font-weight: bold;
+        }
+        
+        footer {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Nhà Hàng Ngon</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                        <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dish Detail Section -->
+    <section class="dish-detail">
+        <div class="container">
+            <div class="dish-container" id="dish-container">
+                <!-- Nội dung sẽ được tải động -->
+            </div>
+            
+            <div class="related-dishes">
+                <h2>Món Ăn Liên Quan</h2>
+                <div class="related-dishes-container" id="related-dishes-container">
+                    <!-- Nội dung sẽ được tải động -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Kiểm tra trạng thái đăng nhập
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const authLink = document.getElementById('auth-link');
+        
+        if (isLoggedIn) {
+            authLink.textContent = 'Tài Khoản';
+        } else {
+            authLink.textContent = 'Đăng Nhập';
+        }
+
+        // Lấy id món ăn từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const dishId = urlParams.get('id');
+
+        // Dữ liệu mẫu cho món ăn
+        const dishes = [
+            {
+                id: '1',
+                name: 'Gỏi cuốn tôm thịt',
+                price: 45000,
+                description: 'Gỏi cuốn tươi với tôm, thịt heo, rau sống và bún, kèm nước chấm đặc biệt.',
+                ingredients: ['Bánh tráng', 'Tôm', 'Thịt heo', 'Bún', 'Rau sống', 'Nước chấm'],
+                nutrition: {
+                    calories: '220 kcal',
+                    protein: '15g',
+                    carbs: '30g',
+                    fat: '5g'
+                },
+                image: 'https://i.imgur.com/1tMFzp8.jpg',
+                category: 'appetizer'
+            },
+            {
+                id: '2',
+                name: 'Chả giò hải sản',
+                price: 65000,
+                description: 'Chả giò giòn rụm nhân hải sản đặc biệt, kèm rau sống và nước mắm chua ngọt.',
+                ingredients: ['Bánh tráng', 'Tôm', 'Mực', 'Cua', 'Nấm mèo', 'Hành tây', 'Nước mắm'],
+                nutrition: {
+                    calories: '280 kcal',
+                    protein: '12g',
+                    carbs: '25g',
+                    fat: '15g'
+                },
+                image: 'https://i.imgur.com/2KNwRIY.jpg',
+                category: 'appetizer'
+            },
+            {
+                id: '3',
+                name: 'Cá hồi nướng sốt chanh dây',
+                price: 125000,
+                description: 'Cá hồi Na Uy tươi ngon nướng với sốt chanh dây, kèm rau củ hấp.',
+                ingredients: ['Cá hồi Na Uy', 'Chanh dây', 'Bơ', 'Rau củ theo mùa', 'Gia vị'],
+                nutrition: {
+                    calories: '320 kcal',
+                    protein: '28g',
+                    carbs: '10g',
+                    fat: '18g'
+                },
+                image: 'https://i.imgur.com/3PtYi0a.jpg',
+                category: 'seafood'
+            },
+            {
+                id: '4',
+                name: 'Tôm hấp bia',
+                price: 165000,
+                description: 'Tôm sú tươi hấp với bia và gia vị đặc biệt, thơm ngon và giữ được vị ngọt tự nhiên.',
+                ingredients: ['Tôm sú', 'Bia', 'Tỏi', 'Ớt', 'Chanh', 'Gia vị'],
+                nutrition: {
+                    calories: '250 kcal',
+                    protein: '30g',
+                    carbs: '5g',
+                    fat: '10g'
+                },
+                image: 'https://i.imgur.com/4QwGBr8.jpg',
+                category: 'seafood'
+            },
+            {
+                id: '5',
+                name: 'Bò lúc lắc',
+                price: 135000,
+                description: 'Thịt bò thăn cắt hạt lựu xào với hành tây, ớt chuông và các loại gia vị đặc biệt.',
+                ingredients: ['Thịt bò thăn', 'Hành tây', 'Ớt chuông', 'Tỏi', 'Dầu hào', 'Gia vị'],
+                nutrition: {
+                    calories: '350 kcal',
+                    protein: '25g',
+                    carbs: '15g',
+                    fat: '20g'
+                },
+                image: 'https://i.imgur.com/5RmNpTz.jpg',
+                category: 'meat'
+            },
+            {
+                id: '6',
+                name: 'Sườn nướng BBQ',
+                price: 145000,
+                description: 'Sườn heo tẩm ướp với sốt BBQ đặc biệt, nướng chậm để giữ độ mềm và thơm ngon.',
+                ingredients: ['Sườn heo', 'Sốt BBQ', 'Mật ong', 'Tỏi', 'Gia vị'],
+                nutrition: {
+                    calories: '420 kcal',
+                    protein: '30g',
+                    carbs: '20g',
+                    fat: '25g'
+                },
+                image: 'https://i.imgur.com/6SvFtPx.jpg',
+                category: 'meat'
+            },
+            {
+                id: '7',
+                name: 'Gà nướng mật ong',
+                price: 120000,
+                description: 'Đùi gà tẩm ướp với mật ong và các loại gia vị, nướng vàng giòn bên ngoài, mềm juicy bên trong.',
+                ingredients: ['Đùi gà', 'Mật ong', 'Tỏi', 'Gừng', 'Xả', 'Gia vị'],
+                nutrition: {
+                    calories: '380 kcal',
+                    protein: '28g',
+                    carbs: '15g',
+                    fat: '22g'
+                },
+                image: 'https://i.imgur.com/7UwGhTy.jpg',
+                category: 'poultry'
+            },
+            {
+                id: '8',
+                name: 'Vịt quay Bắc Kinh',
+                price: 180000,
+                description: 'Vịt quay theo phong cách Bắc Kinh truyền thống, da giòn, thịt mềm, kèm bánh bao và sốt đặc biệt.',
+                ingredients: ['Vịt', 'Mật ong', 'Giấm', 'Ngũ vị hương', 'Bánh bao', 'Sốt đặc biệt'],
+                nutrition: {
+                    calories: '450 kcal',
+                    protein: '32g',
+                    carbs: '25g',
+                    fat: '28g'
+                },
+                image: 'https://i.imgur.com/8XpYhZs.jpg',
+                category: 'poultry'
+            }
+        ];
+
+        // Hiển thị chi tiết món ăn
+        function renderDishDetail() {
+            const dishContainer = document.getElementById('dish-container');
+            const dish = dishes.find(d => d.id === dishId);
+            
+            if (!dish) {
+                dishContainer.innerHTML = '<p>Không tìm thấy món ăn</p>';
+                return;
+            }
+            
+            dishContainer.innerHTML = `
+                <div class="dish-image">
+                    <img src="${dish.image}" alt="${dish.name}">
+                </div>
+                <div class="dish-info">
+                    <h1 class="dish-title">${dish.name}</h1>
+                    <div class="dish-price">${dish.price.toLocaleString()}₫</div>
+                    <p class="dish-description">${dish.description}</p>
+                    
+                    <div class="dish-ingredients">
+                        <h3>Nguyên liệu</h3>
+                        <ul>
+                            ${dish.ingredients.map(ingredient => `<li>${ingredient}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div class="dish-nutrition">
+                        <h3>Thông tin dinh dưỡng</h3>
+                        <div class="nutrition-info">
+                            <div class="nutrition-item">Calories: ${dish.nutrition.calories}</div>
+                            <div class="nutrition-item">Protein: ${dish.nutrition.protein}</div>
+                            <div class="nutrition-item">Carbs: ${dish.nutrition.carbs}</div>
+                            <div class="nutrition-item">Fat: ${dish.nutrition.fat}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="quantity-control">
+                        <button class="quantity-btn" id="decrease-btn">-</button>
+                        <input type="number" class="quantity-input" id="quantity" value="1" min="1" max="10">
+                        <button class="quantity-btn" id="increase-btn">+</button>
+                    </div>
+                    
+                    <button class="btn" id="add-to-cart-btn">Thêm vào giỏ hàng</button>
+                    <a href="menu.html" class="btn btn-outline" style="margin-left: 1rem;">Quay lại thực đơn</a>
+                </div>
+            `;
+            
+            // Hiển thị món ăn liên quan
+            renderRelatedDishes(dish.category);
+            
+            // Xử lý sự kiện tăng/giảm số lượng
+            const decreaseBtn = document.getElementById('decrease-btn');
+            const increaseBtn = document.getElementById('increase-btn');
+            const quantityInput = document.getElementById('quantity');
+            
+            decreaseBtn.addEventListener('click', () => {
+                if (quantityInput.value > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                }
+            });
+            
+            increaseBtn.addEventListener('click', () => {
+                if (quantityInput.value < 10) {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                }
+            });
+            
+            // Xử lý sự kiện thêm vào giỏ hàng
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            
+            addToCartBtn.addEventListener('click', () => {
+                const quantity = parseInt(quantityInput.value);
+                addToCart(dish, quantity);
+            });
+        }
+
+        // Hiển thị món ăn liên quan
+        function renderRelatedDishes(category) {
+            const relatedDishesContainer = document.getElementById('related-dishes-container');
+            const relatedDishes = dishes.filter(dish => dish.category === category && dish.id !== dishId);
+            
+            relatedDishesContainer.innerHTML = relatedDishes.map(dish => `
+                <div class="related-dish">
+                    <div class="related-dish-image" style="background-image: url('${dish.image}'); background-size: cover;"></div>
+                    <div class="related-dish-info">
+                        <div class="related-dish-title">${dish.name}</div>
+                        <div class="related-dish-price">${dish.price.toLocaleString()}₫</div>
+                        <a href="dish-detail.html?id=${dish.id}" class="btn btn-outline" style="margin-top: 0.5rem; display: block; text-align: center;">Xem chi tiết</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Thêm vào giỏ hàng
+        function addToCart(dish, quantity) {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            
+            // Kiểm tra xem món ăn đã có trong giỏ hàng chưa
+            const existingItemIndex = cart.findIndex(item => item.id === dish.id);
+            
+            if (existingItemIndex !== -1) {
+                // Nếu đã có, cập nhật số lượng
+                cart[existingItemIndex].quantity += quantity;
+            } else {
+                // Nếu chưa có, thêm mới
+                cart.push({
+                    id: dish.id,
+                    name: dish.name,
+                    price: dish.price,
+                    quantity: quantity
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`Đã thêm ${quantity} ${dish.name} vào giỏ hàng!`);
+        }
+
+        // Hiển thị chi tiết món ăn khi trang được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDishDetail();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Ngon - Thanh Toán</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffe0d1;
+        }
+        
+        .page-title {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .checkout-section {
+            padding: 3rem 0;
+        }
+        
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .checkout-form, .order-summary {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .checkout-form h2, .order-summary h2 {
+            margin-bottom: 1.5rem;
+            color: #2e4057;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .payment-methods {
+            margin-top: 2rem;
+        }
+        
+        .payment-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover, .payment-method.active {
+            border-color: #ff6b35;
+            background-color: #fff8f5;
+        }
+        
+        .payment-method input {
+            margin-right: 1rem;
+        }
+        
+        .order-items {
+            margin-bottom: 2rem;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-item-name {
+            display: flex;
+            align-items: center;
+        }
+        
+        .order-item-quantity {
+            background-color: #ff6b35;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .order-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .order-summary-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #2e4057;
+            border-top: 1px solid #ddd;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #e85a2a;
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+        
+        .btn-outline:hover {
+            background-color: #ff6b35;
+            color: white;
+        }
+        
+        footer {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .order-type-selector {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .order-type-option {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: #777;
+        }
+        
+        .order-type-option.active {
+            color: #ff6b35;
+            border-bottom: 3px solid #ff6b35;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Nhà Hàng Ngon</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                        <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Thanh Toán</h1>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="order-type-selector">
+                <div class="order-type-option active" data-type="delivery">Giao hàng tận nơi</div>
+                <div class="order-type-option" data-type="pickup">Đặt trước và đến lấy</div>
+                <div class="order-type-option" data-type="dine-in">Đặt tại nhà hàng</div>
+            </div>
+            
+            <div class="checkout-container">
+                <div class="checkout-form">
+                    <h2>Thông tin đặt hàng</h2>
+                    <form id="checkout-form">
+                        <div class="form-group">
+                            <label for="name">Họ tên</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        
+                        <div id="delivery-fields">
+                            <div class="form-group">
+                                <label for="address">Địa chỉ giao hàng</label>
+                                <input type="text" id="address" name="address" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="district">Quận/Huyện</label>
+                                    <input type="text" id="district" name="district" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">Thành phố</label>
+                                    <input type="text" id="city" name="city" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="pickup-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="pickup-time">Thời gian đến lấy</label>
+                                <input type="datetime-local" id="pickup-time" name="pickup-time">
+                            </div>
+                        </div>
+                        
+                        <div id="dine-in-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="table-number">Số bàn</label>
+                                <input type="number" id="table-number" name="table-number" min="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="people-count">Số người</label>
+                                <input type="number" id="people-count" name="people-count" min="1" value="1">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="note">Ghi chú</label>
+                            <textarea id="note" name="note" rows="3"></textarea>
+                        </div>
+                        
+                        <h2>Phương thức thanh toán</h2>
+                        <div class="payment-methods">
+                            <div class="payment-method active">
+                                <input type="radio" id="cod" name="payment-method" value="cod" checked>
+                                <label for="cod">Thanh toán khi nhận hàng</label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="bank-transfer" name="payment-method" value="bank-transfer">
+                                <label for="bank-transfer">Chuyển khoản ngân hàng</label>
+                            </div>
+                            <div class="payment-method">
+                                <input type="radio" id="momo" name="payment-method" value="momo">
+                                <label for="momo">Ví MoMo</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="order-summary">
+                    <h2>Tóm tắt đơn hàng</h2>
+                    <div class="order-items" id="order-items">
+                        <!-- Order items will be loaded dynamically -->
+                    </div>
+                    <div class="order-summary-row">
+                        <span>Tạm tính:</span>
+                        <span id="subtotal">0₫</span>
+                    </div>
+                    <div class="order-summary-row" id="delivery-fee-row">
+                        <span>Phí giao hàng:</span>
+                        <span id="delivery-fee">15.000₫</span>
+                    </div>
+                    <div class="order-summary-row order-summary-total">
+                        <span>Tổng cộng:</span>
+                        <span id="total">0₫</span>
+                    </div>
+                    
+                    <button type="button" class="btn btn-block" id="place-order-btn">Đặt Hàng</button>
+                    <a href="cart.html" class="btn btn-outline btn-block" style="margin-top: 1rem;">Quay Lại Giỏ Hàng</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Kiểm tra trạng thái đăng nhập
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const authLink = document.getElementById('auth-link');
+        
+        if (isLoggedIn) {
+            authLink.textContent = 'Tài Khoản';
+            // Điền thông tin người dùng vào form nếu đã đăng nhập
+            const userName = localStorage.getItem('userName');
+            const userPhone = localStorage.getItem('userPhone');
+            const userAddress = localStorage.getItem('userAddress');
+            
+            if (userName) document.getElementById('name').value = userName;
+            if (userPhone) document.getElementById('phone').value = userPhone;
+            if (userAddress) document.getElementById('address').value = userAddress;
+        } else {
+            authLink.textContent = 'Đăng Nhập';
+        }
+
+        // Lấy giỏ hàng từ localStorage
+        function getCart() {
+            const cart = localStorage.getItem('cart');
+            return cart ? JSON.parse(cart) : [];
+        }
+
+        // Tính tổng tiền giỏ hàng
+        function calculateTotal(cart) {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        // Hiển thị tóm tắt đơn hàng
+        function renderOrderSummary() {
+            const cart = getCart();
+            const orderItemsContainer = document.getElementById('order-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            
+            if (cart.length === 0) {
+                window.location.href = 'cart.html';
+                return;
+            }
+            
+            const subtotal = calculateTotal(cart);
+            let deliveryFee = 15000;
+            
+            // Hiển thị các món ăn trong đơn hàng
+            orderItemsContainer.innerHTML = cart.map(item => `
+                <div class="order-item">
+                    <div class="order-item-name">
+                        <div class="order-item-quantity">${item.quantity}</div>
+                        <span>${item.name}</span>
+                    </div>
+                    <div class="order-item-price">${(item.price * item.quantity).toLocaleString()}₫</div>
+                </div>
+            `).join('');
+            
+            // Cập nhật tổng tiền
+            subtotalElement.textContent = `${subtotal.toLocaleString()}₫`;
+            totalElement.textContent = `${(subtotal + deliveryFee).toLocaleString()}₫`;
+            
+            // Ẩn phí giao hàng nếu không phải đơn giao hàng
+            const orderType = document.querySelector('.order-type-option.active').dataset.type;
+            const deliveryFeeRow = document.getElementById('delivery-fee-row');
+            
+            if (orderType !== 'delivery') {
+                deliveryFeeRow.style.display = 'none';
+                totalElement.textContent = `${subtotal.toLocaleString()}₫`;
+            } else {
+                deliveryFeeRow.style.display = 'flex';
+                totalElement.textContent = `${(subtotal + deliveryFee).toLocaleString()}₫`;
+            }
+        }
+
+        // Xử lý chuyển đổi loại đơn hàng
+        const orderTypeOptions = document.querySelectorAll('.order-type-option');
+        const deliveryFields = document.getElementById('delivery-fields');
+        const pickupFields = document.getElementById('pickup-fields');
+        const dineInFields = document.getElementById('dine-in-fields');
+        
+        orderTypeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                // Xóa class active từ tất cả các options
+                orderTypeOptions.forEach(opt => opt.classList.remove('active'));
+                // Thêm class active vào option được chọn
+                option.classList.add('active');
+                
+                // Hiển thị/ẩn các trường thông tin tương ứng
+                const orderType = option.dataset.type;
+                
+                if (orderType === 'delivery') {
+                    deliveryFields.style.display = 'block';
+                    pickupFields.style.display = 'none';
+                    dineInFields.style.display = 'none';
+                } else if (orderType === 'pickup') {
+                    deliveryFields.style.display = 'none';
+                    pickupFields.style.display = 'block';
+                    dineInFields.style.display = 'none';
+                } else if (orderType === 'dine-in') {
+                    deliveryFields.style.display = 'none';
+                    pickupFields.style.display = 'none';
+                    dineInFields.style.display = 'block';
+                }
+                
+                // Cập nhật tóm tắt đơn hàng
+                renderOrderSummary();
+            });
+        });
+
+        // Xử lý chọn phương thức thanh toán
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                // Xóa class active từ tất cả các phương thức
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                // Thêm class active vào phương thức được chọn
+                method.classList.add('active');
+                // Chọn radio button
+                const radio = method.querySelector('input[type="radio"]');
+                radio.checked = true;
+            });
+        });
+
+        // Xử lý đặt hàng
+        document.getElementById('place-order-btn').addEventListener('click', () => {
+            const form = document.getElementById('checkout-form');
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            
+            // Kiểm tra thông tin cơ bản
+            if (!name || !phone) {
+                alert('Vui lòng nhập đầy đủ họ tên và số điện thoại');
+                return;
+            }
+            
+            // Kiểm tra thông tin theo loại đơn hàng
+            const orderType = document.querySelector('.order-type-option.active').dataset.type;
+            
+            if (orderType === 'delivery') {
+                const address = document.getElementById('address').value;
+                const district = document.getElementById('district').value;
+                const city = document.getElementById('city').value;
+                
+                if (!address || !district || !city) {
+                    alert('Vui lòng nhập đầy đủ địa chỉ giao hàng');
+                    return;
+                }
+            } else if (orderType === 'pickup') {
+                const pickupTime = document.getElementById('pickup-time').value;
+                
+                if (!pickupTime) {
+                    alert('Vui lòng chọn thời gian đến lấy');
+                    return;
+                }
+            } else if (orderType === 'dine-in') {
+                const tableNumber = document.getElementById('table-number').value;
+                
+                if (!tableNumber) {
+                    alert('Vui lòng nhập số bàn');
+                    return;
+                }
+            }
+            
+            // Lấy phương thức thanh toán
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            
+            // Lấy giỏ hàng
+            const cart = getCart();
+            const subtotal = calculateTotal(cart);
+            let deliveryFee = orderType === 'delivery' ? 15000 : 0;
+            const total = subtotal + deliveryFee;
+            
+            // Tạo đơn hàng
+            const order = {
+                id: Date.now().toString(),
+                name,
+                phone,
+                orderType,
+                items: cart,
+                subtotal,
+                deliveryFee,
+                total,
+                paymentMethod,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+            
+            // Thêm thông tin theo loại đơn hàng
+            if (orderType === 'delivery') {
+                order.address = document.getElementById('address').value;
+                order.district = document.getElementById('district').value;
+                order.city = document.getElementById('city').value;
+            } else if (orderType === 'pickup') {
+                order.pickupTime = document.getElementById('pickup-time').value;
+            } else if (orderType === 'dine-in') {
+                order.tableNumber = document.getElementById('table-number').value;
+                order.peopleCount = document.getElementById('people-count').value;
+            }
+            
+            // Thêm ghi chú nếu có
+            const note = document.getElementById('note').value;
+            if (note) {
+                order.note = note;
+            }
+            
+            // Lưu đơn hàng vào localStorage
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            
+            // Xóa giỏ hàng
+            localStorage.removeItem('cart');
+            
+            // Chuyển hướng đến trang xác nhận đơn hàng
+            window.location.href = `order-confirmation.html?id=${order.id}`;
+        });
+
+        // Hiển thị tóm tắt đơn hàng khi trang được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOrderSummary();
+        });
+    </script>
+</body>
+</html>

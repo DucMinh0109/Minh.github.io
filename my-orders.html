@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Ngon - Đơn Hàng Của Tôi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffe0d1;
+        }
+        
+        .page-title {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .orders-section {
+            padding: 3rem 0;
+        }
+        
+        .orders-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .orders-empty {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        
+        .orders-empty p {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: #777;
+        }
+        
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .order-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-id {
+            font-weight: bold;
+            color: #2e4057;
+        }
+        
+        .order-date {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .order-status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            background-color: #f0f0f0;
+            color: #777;
+        }
+        
+        .order-status.pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .order-status.processing {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+        
+        .order-status.completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .order-status.cancelled {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .order-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .order-info-item {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .order-info-label {
+            font-weight: bold;
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .order-info-value {
+            color: #333;
+        }
+        
+        .order-items {
+            margin-bottom: 1rem;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        
+        .order-item-name {
+            display: flex;
+            align-items: center;
+        }
+        
+        .order-item-quantity {
+            background-color: #ff6b35;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .order-total {
+            text-align: right;
+            font-weight: bold;
+            color: #2e4057;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .order-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #e85a2a;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
+        }
+        
+        .btn-outline:hover {
+            background-color: #ff6b35;
+            color: white;
+        }
+        
+        footer {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .order-items-toggle {
+            color: #ff6b35;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .order-items-toggle:hover {
+            text-decoration: underline;
+        }
+        
+        .order-items-toggle i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .order-items-toggle.active i {
+            transform: rotate(180deg);
+        }
+        
+        .order-items-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .order-items-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .order-date {
+                margin-top: 0.5rem;
+            }
+            
+            .order-info {
+                flex-direction: column;
+            }
+            
+            .order-actions {
+                flex-direction: column;
+            }
+            
+            .order-actions .btn {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Nhà Hàng Ngon</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                        <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Đơn Hàng Của Tôi</h1>
+        </div>
+    </section>
+
+    <!-- Orders Section -->
+    <section class="orders-section">
+        <div class="container">
+            <div class="orders-container" id="orders-container">
+                <!-- Nội dung sẽ được tải động -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Kiểm tra trạng thái đăng nhập
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const authLink = document.getElementById('auth-link');
+        
+        if (isLoggedIn) {
+            authLink.textContent = 'Tài Khoản';
+        } else {
+            authLink.textContent = 'Đăng Nhập';
+            // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
+            window.location.href = 'login.html';
+        }
+
+        // Lấy số điện thoại người dùng đã đăng nhập
+        const userPhone = localStorage.getItem('userPhone');
+
+        // Lấy tất cả đơn hàng từ localStorage
+        function getOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            // Lọc đơn hàng theo số điện thoại người dùng
+            return orders.filter(order => order.phone === userPhone);
+        }
+
+        // Định dạng ngày giờ
+        function formatDateTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return date.toLocaleString('vi-VN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // Hiển thị danh sách đơn hàng
+        function renderOrders() {
+            const orders = getOrders();
+            const ordersContainer = document.getElementById('orders-container');
+            
+            if (orders.length === 0) {
+                ordersContainer.innerHTML = `
+                    <div class="orders-empty">
+                        <p>Bạn chưa có đơn hàng nào</p>
+                        <a href="menu.html" class="btn">Đặt Hàng Ngay</a>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Sắp xếp đơn hàng theo thời gian mới nhất
+            orders.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            
+            ordersContainer.innerHTML = orders.map((order, index) => {
+                // Xác định loại đơn hàng
+                let orderTypeText = '';
+                let orderTypeDetails = '';
+                
+                if (order.orderType === 'delivery') {
+                    orderTypeText = 'Giao hàng tận nơi';
+                    orderTypeDetails = `${order.address}, ${order.district}, ${order.city}`;
+                } else if (order.orderType === 'pickup') {
+                    orderTypeText = 'Đặt trước và đến lấy';
+                    orderTypeDetails = `Thời gian: ${formatDateTime(order.pickupTime)}`;
+                } else if (order.orderType === 'dine-in') {
+                    orderTypeText = 'Đặt tại nhà hàng';
+                    orderTypeDetails = `Bàn số: ${order.tableNumber}, Số người: ${order.peopleCount}`;
+                }
+                
+                // Xác định phương thức thanh toán
+                let paymentMethodText = '';
+                
+                if (order.paymentMethod === 'cod') {
+                    paymentMethodText = 'Thanh toán khi nhận hàng';
+                } else if (order.paymentMethod === 'bank-transfer') {
+                    paymentMethodText = 'Chuyển khoản ngân hàng';
+                } else if (order.paymentMethod === 'momo') {
+                    paymentMethodText = 'Ví MoMo';
+                }
+                
+                // Xác định trạng thái đơn hàng
+                let statusText = '';
+                let statusClass = '';
+                
+                if (order.status === 'pending') {
+                    statusText = 'Chờ xác nhận';
+                    statusClass = 'pending';
+                } else if (order.status === 'processing') {
+                    statusText = 'Đang xử lý';
+                    statusClass = 'processing';
+                } else if (order.status === 'completed') {
+                    statusText = 'Hoàn thành';
+                    statusClass = 'completed';
+                } else if (order.status === 'cancelled') {
+                    statusText = 'Đã hủy';
+                    statusClass = 'cancelled';
+                }
+                
+                return `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div>
+                                <div class="order-id">Đơn hàng #${order.id}</div>
+                                <div class="order-date">${formatDateTime(order.createdAt)}</div>
+                            </div>
+                            <div class="order-status ${statusClass}">${statusText}</div>
+                        </div>
+                        
+                        <div class="order-info">
+                            <div class="order-info-item">
+                                <div class="order-info-label">Loại đơn hàng</div>
+                                <div class="order-info-value">${orderTypeText}</div>
+                            </div>
+                            <div class="order-info-item">
+                                <div class="order-info-label">Chi tiết</div>
+                                <div class="order-info-value">${orderTypeDetails}</div>
+                            </div>
+                            <div class="order-info-item">
+                                <div class="order-info-label">Thanh toán</div>
+                                <div class="order-info-value">${paymentMethodText}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="order-items-toggle" onclick="toggleOrderItems(${index})">
+                            Xem chi tiết món ăn <i>▼</i>
+                        </div>
+                        
+                        <div class="order-items-content" id="order-items-${index}">
+                            <div class="order-items">
+                                ${order.items.map(item => `
+                                    <div class="order-item">
+                                        <div class="order-item-name">
+                                            <div class="order-item-quantity">${item.quantity}</div>
+                                            <span>${item.name}</span>
+                                        </div>
+                                        <div class="order-item-price">${(item.price * item.quantity).toLocaleString()}₫</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="order-total">
+                                Tổng cộng: ${order.total.toLocaleString()}₫
+                            </div>
+                        </div>
+                        
+                        <div class="order-actions">
+                            <a href="order-confirmation.html?id=${order.id}" class="btn">Xem Chi Tiết</a>
+                            ${order.status === 'pending' ? `
+                                <button class="btn btn-outline" onclick="cancelOrder('${order.id}')">Hủy Đơn Hàng</button>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Hiển thị/ẩn chi tiết món ăn
+        function toggleOrderItems(index) {
+            const toggle = document.querySelectorAll('.order-items-toggle')[index];
+            const content = document.getElementById(`order-items-${index}`);
+            
+            toggle.classList.toggle('active');
+            content.classList.toggle('active');
+        }
+
+        // Hủy đơn hàng
+        function cancelOrder(orderId) {
+            if (confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
+                const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+                const orderIndex = orders.findIndex(order => order.id === orderId);
+                
+                if (orderIndex !== -1) {
+                    orders[orderIndex].status = 'cancelled';
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                    renderOrders();
+                }
+            }
+        }
+
+        // Hiển thị danh sách đơn hàng khi trang được tải
+        document.addEventListener('DOMContentLoaded', () => {
+            renderOrders();
+        });
+    </script>
+</body>
+</html>

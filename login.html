@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhà Hàng Ngon - Đăng Nhập</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: #ff6b35;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #ffe0d1;
+        }
+        
+        .page-title {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .auth-container {
+            max-width: 500px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .auth-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: #777;
+        }
+        
+        .auth-tab.active {
+            color: #ff6b35;
+            border-bottom: 3px solid #ff6b35;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b35;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background-color: #e85a2a;
+        }
+        
+        .delivery-address {
+            display: none;
+        }
+        
+        footer {
+            background-color: #2e4057;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Nhà Hàng Ngon</div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Trang Chủ</a></li>
+                        <li><a href="menu.html">Thực Đơn</a></li>
+                        <li><a href="#">Giới Thiệu</a></li>
+                        <li><a href="#">Liên Hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h1>Đăng Nhập / Đăng Ký</h1>
+        </div>
+    </section>
+
+    <!-- Authentication Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="login-tab">Đăng Nhập</div>
+                    <div class="auth-tab" id="register-tab">Đăng Ký</div>
+                </div>
+
+                <!-- Login Form -->
+                <form class="auth-form active" id="login-form">
+                    <div class="form-group">
+                        <label for="login-phone">Số Điện Thoại</label>
+                        <input type="tel" id="login-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Mật Khẩu</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn">Đăng Nhập</button>
+                </form>
+
+                <!-- Register Form -->
+                <form class="auth-form" id="register-form">
+                    <div class="form-group">
+                        <label for="register-name">Họ Tên</label>
+                        <input type="text" id="register-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-phone">Số Điện Thoại</label>
+                        <input type="tel" id="register-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Mật Khẩu</label>
+                        <input type="password" id="register-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="order-type">Loại Đơn Hàng</label>
+                        <select id="order-type" name="order-type">
+                            <option value="delivery">Giao hàng tận nơi</option>
+                            <option value="pickup">Đặt trước và đến lấy</option>
+                            <option value="dine-in">Đặt tại nhà hàng</option>
+                        </select>
+                    </div>
+                    <div class="form-group delivery-address" id="delivery-address">
+                        <label for="register-address">Địa Chỉ Giao Hàng</label>
+                        <input type="text" id="register-address" name="address">
+                    </div>
+                    <button type="submit" class="btn">Đăng Ký</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Xử lý chuyển đổi tab đăng nhập/đăng ký
+        const loginTab = document.getElementById('login-tab');
+        const registerTab = document.getElementById('register-tab');
+        const loginForm = document.getElementById('login-form');
+        const registerForm = document.getElementById('register-form');
+
+        loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginForm.classList.add('active');
+            registerForm.classList.remove('active');
+        });
+
+        registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerForm.classList.add('active');
+            loginForm.classList.remove('active');
+        });
+
+        // Hiển thị/ẩn trường địa chỉ dựa trên loại đơn hàng
+        const orderTypeSelect = document.getElementById('order-type');
+        const deliveryAddressDiv = document.getElementById('delivery-address');
+
+        orderTypeSelect.addEventListener('change', () => {
+            if (orderTypeSelect.value === 'delivery') {
+                deliveryAddressDiv.style.display = 'block';
+            } else {
+                deliveryAddressDiv.style.display = 'none';
+            }
+        });
+
+        // Xử lý đăng nhập
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const phone = document.getElementById('login-phone').value;
+            const password = document.getElementById('login-password').value;
+            
+            // Trong thực tế, bạn sẽ gửi request đến server để xác thực
+            // Ở đây chúng ta giả lập đăng nhập thành công
+            alert('Đăng nhập thành công!');
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userPhone', phone);
+            window.location.href = 'index.html';
+        });
+
+        // Xử lý đăng ký
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            const orderType = document.getElementById('order-type').value;
+            const address = document.getElementById('register-address').value;
+            
+            // Trong thực tế, bạn sẽ gửi request đến server để đăng ký
+            // Ở đây chúng ta giả lập đăng ký thành công
+            alert('Đăng ký thành công!');
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', name);
+            localStorage.setItem('userPhone', phone);
+            localStorage.setItem('orderType', orderType);
+            if (orderType === 'delivery') {
+                localStorage.setItem('userAddress', address);
+            }
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
