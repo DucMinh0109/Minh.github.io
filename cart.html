@@ -239,6 +239,7 @@
                         <li><a href="#">Giới Thiệu</a></li>
                         <li><a href="#">Liên Hệ</a></li>
                         <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
+                        <li><a href="account.html">Tài Khoản</a></li>
                     </ul>
                 </nav>
             </div>
@@ -275,9 +276,10 @@
         
         if (isLoggedIn) {
             authLink.textContent = 'Tài Khoản';
-            // Trong thực tế, bạn có thể thêm dropdown menu cho tài khoản
+            authLink.href = 'account.html';
         } else {
             authLink.textContent = 'Đăng Nhập';
+            authLink.href = 'login.html';
         }
 
         // Lấy giỏ hàng từ localStorage
