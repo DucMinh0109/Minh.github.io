@@ -11,13 +11,11 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         body {
             background-color: #f9f9f9;
             color: #333;
             line-height: 1.6;
         }
-        
         header {
             background-color: #ff6b35;
             color: white;
@@ -27,61 +25,50 @@
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 1rem;
         }
-        
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
         .logo {
             font-size: 1.8rem;
             font-weight: bold;
         }
-        
         nav ul {
             display: flex;
             list-style: none;
         }
-        
         nav ul li {
             margin-left: 1.5rem;
         }
-        
         nav ul li a {
             color: white;
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
-        
         nav ul li a:hover {
             color: #ffe0d1;
         }
-        
         .page-title {
             background-color: #2e4057;
             color: white;
             padding: 2rem 0;
             text-align: center;
         }
-        
         .account-section {
             padding: 3rem 0;
         }
-        
         .account-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
         }
-        
         .account-sidebar {
             flex: 1;
             min-width: 250px;
@@ -91,7 +78,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
         }
-        
         .account-sidebar-header {
             display: flex;
             align-items: center;
@@ -99,7 +85,6 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #eee;
         }
-        
         .account-avatar {
             width: 60px;
             height: 60px;
@@ -113,25 +98,24 @@
             font-weight: bold;
             margin-right: 1rem;
         }
-        
         .account-name {
             font-weight: bold;
             font-size: 1.2rem;
         }
-        
         .account-phone {
             color: #777;
             font-size: 0.9rem;
         }
-        
+        .account-birthday {
+            color: #777;
+            font-size: 0.9rem;
+        }
         .account-menu {
             list-style: none;
         }
-        
         .account-menu-item {
             margin-bottom: 0.5rem;
         }
-        
         .account-menu-link {
             display: block;
             padding: 0.8rem;
@@ -140,17 +124,14 @@
             border-radius: 5px;
             transition: all 0.3s;
         }
-        
         .account-menu-link:hover, .account-menu-link.active {
             background-color: #fff3e0;
             color: #ff6b35;
         }
-        
         .account-menu-link i {
             margin-right: 0.5rem;
             color: #ff6b35;
         }
-        
         .account-content {
             flex: 3;
             min-width: 300px;
@@ -159,7 +140,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             padding: 2rem;
         }
-        
         .account-section-title {
             font-size: 1.5rem;
             margin-bottom: 1.5rem;
@@ -167,17 +147,14 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid #eee;
         }
-        
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
         }
-        
         .form-group input, .form-group select {
             width: 100%;
             padding: 0.8rem;
@@ -185,12 +162,10 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-        
         .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: #ff6b35;
         }
-        
         .btn {
             display: inline-block;
             background-color: #ff6b35;
@@ -204,37 +179,30 @@
             font-weight: bold;
             transition: background-color 0.3s;
         }
-        
         .btn:hover {
             background-color: #e85a2a;
         }
-        
         .btn-outline {
             background-color: transparent;
             border: 2px solid #ff6b35;
             color: #ff6b35;
         }
-        
         .btn-outline:hover {
             background-color: #ff6b35;
             color: white;
         }
-        
         .account-tab {
             display: none;
         }
-        
         .account-tab.active {
             display: block;
         }
-        
         .order-history-item {
             border: 1px solid #eee;
             border-radius: 10px;
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        
         .order-history-header {
             display: flex;
             justify-content: space-between;
@@ -242,16 +210,13 @@
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #eee;
         }
-        
         .order-history-id {
             font-weight: bold;
         }
-        
         .order-history-date {
             color: #777;
             font-size: 0.9rem;
         }
-        
         .order-history-status {
             display: inline-block;
             padding: 0.3rem 0.8rem;
@@ -261,37 +226,30 @@
             background-color: #f0f0f0;
             color: #777;
         }
-        
         .order-history-status.pending {
             background-color: #fff3cd;
             color: #856404;
         }
-        
         .order-history-status.processing {
             background-color: #cce5ff;
             color: #004085;
         }
-        
         .order-history-status.completed {
             background-color: #d4edda;
             color: #155724;
         }
-        
         .order-history-status.cancelled {
             background-color: #f8d7da;
             color: #721c24;
         }
-        
         .order-history-total {
             font-weight: bold;
             color: #2e4057;
         }
-        
         .logout-btn {
             margin-top: 2rem;
             width: 100%;
         }
-        
         footer {
             background-color: #2e4057;
             color: white;
@@ -299,13 +257,11 @@
             text-align: center;
             margin-top: 3rem;
         }
-
         .favorite-dishes {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
         }
-
         .favorite-dish {
             width: calc(33.33% - 1rem);
             min-width: 250px;
@@ -315,51 +271,42 @@
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
         }
-
         .favorite-dish:hover {
             transform: translateY(-5px);
         }
-
         .favorite-dish-img {
             height: 180px;
             overflow: hidden;
         }
-
         .favorite-dish-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .favorite-dish-info {
             padding: 1rem;
         }
-
         .favorite-dish-title {
             font-weight: bold;
             margin-bottom: 0.5rem;
             color: #2e4057;
         }
-
         .favorite-dish-price {
             color: #ff6b35;
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
-
         .favorite-dish-actions {
             display: flex;
             justify-content: space-between;
             margin-top: 1rem;
         }
-
         .notification-item {
             padding: 1rem;
             border-bottom: 1px solid #eee;
             display: flex;
             align-items: flex-start;
         }
-
         .notification-icon {
             width: 40px;
             height: 40px;
@@ -371,37 +318,30 @@
             margin-right: 1rem;
             flex-shrink: 0;
         }
-
         .notification-icon.order {
             background-color: #cce5ff;
             color: #004085;
         }
-
         .notification-icon.promo {
             background-color: #d4edda;
             color: #155724;
         }
-
         .notification-content {
             flex: 1;
         }
-
         .notification-title {
             font-weight: bold;
             margin-bottom: 0.3rem;
         }
-
         .notification-text {
             color: #555;
             font-size: 0.9rem;
             margin-bottom: 0.3rem;
         }
-
         .notification-time {
             color: #777;
             font-size: 0.8rem;
         }
-
         .notification-unread {
             width: 10px;
             height: 10px;
@@ -410,7 +350,6 @@
             margin-left: 1rem;
             flex-shrink: 0;
         }
-
         .address-item {
             border: 1px solid #eee;
             border-radius: 10px;
@@ -418,7 +357,6 @@
             margin-bottom: 1rem;
             position: relative;
         }
-
         .address-default {
             position: absolute;
             top: 1rem;
@@ -429,27 +367,22 @@
             border-radius: 5px;
             font-size: 0.8rem;
         }
-
         .address-name {
             font-weight: bold;
             margin-bottom: 0.5rem;
         }
-
         .address-details {
             color: #555;
             margin-bottom: 0.5rem;
         }
-
         .address-phone {
             color: #777;
             margin-bottom: 1rem;
         }
-
         .address-actions {
             display: flex;
             gap: 0.5rem;
         }
-
         .address-actions button {
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
@@ -492,6 +425,7 @@
                         <div>
                             <div class="account-name" id="account-name"></div>
                             <div class="account-phone" id="account-phone"></div>
+                            <div class="account-birthday" id="account-birthday"></div>
                         </div>
                     </div>
                     <ul class="account-menu">
@@ -527,39 +461,26 @@
                     <!-- Profile Tab -->
                     <div class="account-tab active" id="profile-tab">
                         <h2 class="account-section-title">Thông Tin Cá Nhân</h2>
-                        <form id="profile-form">
-                            <div class="form-group">
-                                <label for="profile-name">Họ Tên</label>
-                                <input type="text" id="profile-name" name="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="profile-phone">Số Điện Thoại</label>
-                                <input type="tel" id="profile-phone" name="phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="profile-email">Email</label>
-                                <input type="email" id="profile-email" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="profile-birthday">Ngày Sinh</label>
-                                <input type="date" id="profile-birthday" name="birthday">
-                            </div>
-                            <button type="submit" class="btn">Cập Nhật Thông Tin</button>
-                        </form>
+                        <div class="profile-info">
+                            <p><strong>Họ Tên:</strong> <span id="display-name"></span></p>
+                            <p><strong>Số Điện Thoại:</strong> <span id="display-phone"></span></p>
+                            <p><strong>Email:</strong> <span id="display-email"></span></p>
+                            <p><strong>Ngày Sinh:</strong> <span id="display-birthday"></span></p>
+                        </div>
                         
                         <h2 class="account-section-title" style="margin-top: 2rem;">Đổi Mật Khẩu</h2>
                         <form id="password-form">
                             <div class="form-group">
                                 <label for="current-password">Mật Khẩu Hiện Tại</label>
-                                <input type="password" id="current-password" name="current-password">
+                                <input type="password" id="current-password" name="current-password" required>
                             </div>
                             <div class="form-group">
                                 <label for="new-password">Mật Khẩu Mới</label>
-                                <input type="password" id="new-password" name="new-password">
+                                <input type="password" id="new-password" name="new-password" required>
                             </div>
                             <div class="form-group">
                                 <label for="confirm-password">Xác Nhận Mật Khẩu Mới</label>
-                                <input type="password" id="confirm-password" name="confirm-password">
+                                <input type="password" id="confirm-password" name="confirm-password" required>
                             </div>
                             <button type="submit" class="btn">Đổi Mật Khẩu</button>
                         </form>
@@ -632,7 +553,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
+            <p>© 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
         </div>
     </footer>
 
@@ -646,25 +567,41 @@
             authLink.href = 'account.html';
         } else {
             authLink.textContent = 'Đăng Nhập';
-            // Chuyển hướng đến trang đăng nhập nếu chưa đăng nhập
             window.location.href = 'login.html';
         }
 
-        // Hiển thị thông tin người dùng
-        const userName = localStorage.getItem('userName') || 'Người dùng';
-        const userPhone = localStorage.getItem('userPhone') || '';
-        const userEmail = localStorage.getItem('userEmail') || '';
-        const userBirthday = localStorage.getItem('userBirthday') || '';
-        
-        document.getElementById('account-name').textContent = userName;
-        document.getElementById('account-phone').textContent = userPhone;
-        document.getElementById('account-avatar').textContent = userName.charAt(0);
-        
-        // Điền thông tin vào form
-        document.getElementById('profile-name').value = userName;
-        document.getElementById('profile-phone').value = userPhone;
-        document.getElementById('profile-email').value = userEmail;
-        document.getElementById('profile-birthday').value = userBirthday;
+        // Lấy thông tin người dùng từ API
+        async function loadUserProfile() {
+            const userId = localStorage.getItem('userId');
+            if (!userId) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            try {
+                console.log('Gửi yêu cầu lấy thông tin người dùng:', { userId });
+                const response = await fetch(`http://localhost:3000/api/users/${userId}`);
+                const user = await response.json();
+                console.log('Phản hồi thông tin người dùng:', { status: response.status, user });
+
+                if (response.ok) {
+                    document.getElementById('account-name').textContent = user.name;
+                    document.getElementById('account-phone').textContent = user.phone;
+                    document.getElementById('account-avatar').textContent = user.name.charAt(0);
+                    document.getElementById('display-name').textContent = user.name;
+                    document.getElementById('display-phone').textContent = user.phone;
+                    document.getElementById('display-email').textContent = user.email || 'Chưa cập nhật';
+                    document.getElementById('display-birthday').textContent = user.birthday ? user.birthday.split('T')[0] : 'Chưa cập nhật';
+                    document.getElementById('account-birthday').textContent = user.birthday ? user.birthday.split('T')[0] : 'Chưa cập nhật';
+                } else {
+                    alert(user.message);
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                console.error('Lỗi chi tiết khi tải thông tin người dùng:', error);
+                alert('Lỗi kết nối server khi tải thông tin người dùng');
+            }
+        }
 
         // Xử lý chuyển tab
         const menuLinks = document.querySelectorAll('.account-menu-link');
@@ -673,15 +610,9 @@
         menuLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                
-                // Xóa active class từ tất cả các link và tab
                 menuLinks.forEach(l => l.classList.remove('active'));
                 tabs.forEach(t => t.classList.remove('active'));
-                
-                // Thêm active class cho link được click
                 link.classList.add('active');
-                
-                // Hiển thị tab tương ứng
                 const tabId = link.getAttribute('data-tab');
                 document.getElementById(tabId).classList.add('active');
             });
@@ -690,6 +621,7 @@
         // Xử lý đăng xuất
         document.getElementById('logout-btn').addEventListener('click', () => {
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userId');
             localStorage.removeItem('userName');
             localStorage.removeItem('userPhone');
             localStorage.removeItem('userEmail');
@@ -697,46 +629,39 @@
             window.location.href = 'login.html';
         });
 
-        // Xử lý cập nhật thông tin cá nhân
-        document.getElementById('profile-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('profile-name').value;
-            const phone = document.getElementById('profile-phone').value;
-            const email = document.getElementById('profile-email').value;
-            const birthday = document.getElementById('profile-birthday').value;
-            
-            localStorage.setItem('userName', name);
-            localStorage.setItem('userPhone', phone);
-            localStorage.setItem('userEmail', email);
-            localStorage.setItem('userBirthday', birthday);
-            
-            document.getElementById('account-name').textContent = name;
-            document.getElementById('account-phone').textContent = phone;
-            document.getElementById('account-avatar').textContent = name.charAt(0);
-            
-            alert('Cập nhật thông tin thành công!');
-        });
-
         // Xử lý đổi mật khẩu
-        document.getElementById('password-form').addEventListener('submit', (e) => {
+        document.getElementById('password-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+            const userId = localStorage.getItem('userId');
             const currentPassword = document.getElementById('current-password').value;
             const newPassword = document.getElementById('new-password').value;
             const confirmPassword = document.getElementById('confirm-password').value;
-            
+
             if (newPassword !== confirmPassword) {
                 alert('Mật khẩu mới không khớp!');
                 return;
             }
-            
-            // Trong thực tế, bạn sẽ gửi request đến server để đổi mật khẩu
-            // Ở đây chúng ta giả lập đổi mật khẩu thành công
-            alert('Đổi mật khẩu thành công!');
-            
-            // Reset form
-            document.getElementById('password-form').reset();
+
+            try {
+                console.log('Gửi yêu cầu đổi mật khẩu:', { userId, currentPassword, newPassword });
+                const response = await fetch(`http://localhost:3000/api/users/${userId}/change-password`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ currentPassword, newPassword })
+                });
+                const data = await response.json();
+                console.log('Phản hồi từ server khi đổi mật khẩu:', { status: response.status, data });
+
+                if (response.ok) {
+                    alert(data.message);
+                    document.getElementById('password-form').reset();
+                } else {
+                    alert(data.message);
+                }
+            } catch (error) {
+                console.error('Lỗi chi tiết khi đổi mật khẩu:', error);
+                alert('Lỗi kết nối server khi đổi mật khẩu');
+            }
         });
 
         // Hiển thị lịch sử đơn hàng
@@ -751,33 +676,22 @@
             
             orderHistoryContainer.innerHTML = orders.map(order => {
                 let statusClass = '';
-                switch (order.status) {
-                    case 'pending':
-                        statusClass = 'pending';
-                        break;
-                    case 'processing':
-                        statusClass = 'processing';
-                        break;
-                    case 'completed':
-                        statusClass = 'completed';
-                        break;
-                    case 'cancelled':
-                        statusClass = 'cancelled';
-                        break;
-                }
-                
                 let statusText = '';
                 switch (order.status) {
                     case 'pending':
+                        statusClass = 'pending';
                         statusText = 'Chờ xác nhận';
                         break;
                     case 'processing':
+                        statusClass = 'processing';
                         statusText = 'Đang xử lý';
                         break;
                     case 'completed':
+                        statusClass = 'completed';
                         statusText = 'Đã hoàn thành';
                         break;
                     case 'cancelled':
+                        statusClass = 'cancelled';
                         statusText = 'Đã hủy';
                         break;
                 }
@@ -786,7 +700,7 @@
                     <div class="order-history-item">
                         <div class="order-history-header">
                             <div class="order-history-id">Đơn hàng #${order.id}</div>
-                            <div class="order-history-date">${new Date(order.date).toLocaleDateString('vi-VN')}</div>
+                            <div class="order-history-date">${new Date(order.createdAt).toLocaleDateString('vi-VN')}</div>
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <div class="order-history-status ${statusClass}">${statusText}</div>
@@ -845,7 +759,6 @@
             const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
             
             if (isDefault) {
-                // Nếu địa chỉ mới là mặc định, cập nhật tất cả các địa chỉ khác thành không mặc định
                 addresses.forEach(address => {
                     address.default = false;
                 });
@@ -860,7 +773,6 @@
             
             localStorage.setItem('addresses', JSON.stringify(addresses));
             
-            // Ẩn form và hiển thị lại danh sách địa chỉ
             document.getElementById('add-address-form').style.display = 'none';
             document.getElementById('address-form').reset();
             renderAddresses();
@@ -880,7 +792,6 @@
             
             document.getElementById('add-address-form').style.display = 'block';
             
-            // Thay đổi xử lý form để cập nhật địa chỉ thay vì thêm mới
             const addressForm = document.getElementById('address-form');
             addressForm.onsubmit = function(e) {
                 e.preventDefault();
@@ -891,7 +802,6 @@
                 const isDefault = document.getElementById('address-default').checked;
                 
                 if (isDefault) {
-                    // Nếu địa chỉ này là mặc định, cập nhật tất cả các địa chỉ khác thành không mặc định
                     addresses.forEach(address => {
                         address.default = false;
                     });
@@ -906,12 +816,10 @@
                 
                 localStorage.setItem('addresses', JSON.stringify(addresses));
                 
-                // Ẩn form và hiển thị lại danh sách địa chỉ
                 document.getElementById('add-address-form').style.display = 'none';
                 document.getElementById('address-form').reset();
                 renderAddresses();
                 
-                // Khôi phục xử lý form về thêm mới
                 addressForm.onsubmit = null;
                 
                 alert('Cập nhật địa chỉ thành công!');
@@ -930,12 +838,10 @@
         function setDefaultAddress(index) {
             const addresses = JSON.parse(localStorage.getItem('addresses') || '[]');
             
-            // Cập nhật tất cả các địa chỉ thành không mặc định
             addresses.forEach(address => {
                 address.default = false;
             });
             
-            // Đặt địa chỉ được chọn làm mặc định
             addresses[index].default = true;
             
             localStorage.setItem('addresses', JSON.stringify(addresses));
@@ -952,7 +858,6 @@
                 return;
             }
             
-            // Dữ liệu mẫu cho món ăn
             const allDishes = [
                 {
                     id: '1',
@@ -1035,7 +940,6 @@
 
         // Thêm vào giỏ hàng từ danh sách yêu thích
         function addToCartFromFavorites(dishId) {
-            // Dữ liệu mẫu cho món ăn
             const allDishes = [
                 {
                     id: '1',
@@ -1101,14 +1005,11 @@
             
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             
-            // Kiểm tra xem món ăn đã có trong giỏ hàng chưa
             const existingItemIndex = cart.findIndex(item => item.id === dish.id);
             
             if (existingItemIndex !== -1) {
-                // Nếu đã có, tăng số lượng lên 1
                 cart[existingItemIndex].quantity += 1;
             } else {
-                // Nếu chưa có, thêm mới với số lượng là 1
                 cart.push({
                     id: dish.id,
                     name: dish.name,
@@ -1124,8 +1025,6 @@
         // Hiển thị thông báo
         function renderNotifications() {
             const notificationsContainer = document.getElementById('notifications-container');
-            
-            // Dữ liệu mẫu cho thông báo
             const notifications = [
                 {
                     id: 1,
@@ -1175,13 +1074,14 @@
 
         // Tải dữ liệu khi trang được tải
         document.addEventListener('DOMContentLoaded', () => {
+            loadUserProfile();
             renderOrderHistory();
             renderAddresses();
             renderFavoriteDishes();
             renderNotifications();
         });
 
-        // Đặt các hàm xử lý địa chỉ vào window để có thể gọi từ HTML
+        // Đặt các hàm xử lý địa chỉ vào window để gọi từ HTML
         window.editAddress = editAddress;
         window.deleteAddress = deleteAddress;
         window.setDefaultAddress = setDefaultAddress;

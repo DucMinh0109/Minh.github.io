@@ -151,6 +151,7 @@
                         <li><a href="#">Liên Hệ</a></li>
                         <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
                         <li><a href="cart.html">Giỏ Hàng</a></li>
+                       
                     </ul>
                 </nav>
             </div>
@@ -190,6 +191,17 @@
             <p>&copy; 2025 Nhà Hàng Ngon. Tất cả quyền được bảo lưu.</p>
         </div>
     </footer>
+    <script>
+        const authLink = document.getElementById('auth-link');
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (isLoggedIn) {
+            authLink.textContent = 'Tài Khoản';
+            authLink.href = 'account.html';
+        } else {
+            authLink.textContent = 'Đăng Nhập';
+            authLink.href = 'login.html';
+        }
+    </script>
 </body>
 </html>
 

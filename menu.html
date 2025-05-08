@@ -216,7 +216,7 @@
                         <li><a href="menu.html">Thực Đơn</a></li>
                         <li><a href="#">Giới Thiệu</a></li>
                         <li><a href="#">Liên Hệ</a></li>
-                        <li><a href="login.html" id="auth-link">Đăng Nhập</a></li>
+                        <li><a href="account.html" id="auth-link">Tài Khoản</a></li>
                         <li><a href="cart.html">Giỏ Hàng</a></li>
                     </ul>
                 </nav>
@@ -352,7 +352,6 @@
     
         // 4. Thêm chức năng điều chỉnh số lượng món ăn vào menu.html
         
-        Cải tiến trang menu để có thể thêm nhanh món ăn vào giỏ hàng với số lượng tùy chỉnh:
     
         <style>
             .menu-item-actions {
@@ -508,6 +507,17 @@
                     button.classList.remove('active');
                 }
             });
+        }
+    </script>
+    <script>
+        const authLink = document.getElementById('auth-link');
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        if (isLoggedIn) {
+            authLink.textContent = 'Tài Khoản';
+            authLink.href = 'account.html';
+        } else {
+            authLink.textContent = 'Đăng Nhập';
+            authLink.href = 'login.html';
         }
     </script>
 </body>

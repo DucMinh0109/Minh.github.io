@@ -1,0 +1,26 @@
+{
+  "name": "resturant.github.io",
+  "version": "1.0.0",
+  "description": "Website đặt món ăn trực tuyến cho nhà hàng Việt Nam với giao diện thân thiện và dễ sử dụng.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DucMinh0109/Resturant.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DucMinh0109/Resturant.github.io/issues"
+  },
+  "homepage": "https://github.com/DucMinh0109/Resturant.github.io#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
+  }
+}

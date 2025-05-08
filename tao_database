@@ -1,0 +1,17 @@
+CREATE DATABASE restaurant_db;
+USE restaurant_db;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    birthday DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Thêm dữ liệu mẫu
+INSERT INTO users (name, phone, email, password, birthday) 
+VALUES ('Nguyen Van A', '0901234567', 'nva@example.com', '$2b$10$z9X8jY8Z9Y8Z9Y8Z9Y8Z9u', '1990-01-01');
